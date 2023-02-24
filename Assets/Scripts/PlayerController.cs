@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     bool moving;
     float speedBoost;
 
+    GameObject[] allNPCs;
+
     Camera main;
 
     void Start()
@@ -21,6 +23,8 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         ResetMovement();
+
+        allNPCs = GameObject.FindGameObjectsWithTag("NPC");
         
         main = Camera.main;
     }
@@ -33,9 +37,23 @@ public class PlayerController : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, hit.point) > clickRadius && !hit.transform.gameObject.Equals(gameObject))
             {
-                target = hit.point;
+                bool isNPC = hit.transform.gameObject.CompareTag("NPC");
+
+                if (!isNPC)
+                {
+                    foreach (GameObject i in allNPCs)
+                    {
+                        if (Vector3.Distance(i.transform.position, hit.point) <= clickRadius)
+                        {
+                            isNPC = true;
+                            break;
+                        }
+                    }
+                }
+
+                target = isNPC ? hit.transform.position : hit.point;
                 direction = target - transform.position;
-                
+
                 moving = true;
                 anim.SetBool("isWalking", true);
                 if (direction.magnitude >= 15)
@@ -45,6 +63,8 @@ public class PlayerController : MonoBehaviour
                 }
 
                 direction = direction.normalized;
+                
+                if (isNPC) target -= direction * clickRadius * 3;
             }
             else
             {

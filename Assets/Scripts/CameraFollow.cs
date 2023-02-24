@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class FollowPlayer : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    [SerializeField] Transform player;
     [SerializeField] float speed = 0.5f;
     
     Vector3 offset;
@@ -15,6 +15,6 @@ public class FollowPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position += ((player.transform.position + offset) - transform.position) * (speed * 0.1f);
+        transform.position += ((player.position + offset) - transform.position) * (speed * 0.1f);
     }
 }
