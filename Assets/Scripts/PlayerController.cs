@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 10;
     [SerializeField] float clickRadius = 2;
+    [SerializeField] GameObject speechBubble;
     
     Animator anim;
     Rigidbody rb;
@@ -16,13 +17,14 @@ public class PlayerController : MonoBehaviour
     GameObject[] allNPCs;
 
     Camera main;
+    Vector3 bubblePosition;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
-        ResetMovement();
+        ResetMovement(false);
 
         allNPCs = GameObject.FindGameObjectsWithTag("NPC");
         
@@ -39,13 +41,15 @@ public class PlayerController : MonoBehaviour
             {
                 bool isNPC = hit.transform.gameObject.CompareTag("NPC");
 
-                if (!isNPC)
+                if (isNPC) bubblePosition = hit.transform.position;
+                else
                 {
                     foreach (GameObject i in allNPCs)
                     {
                         if (Vector3.Distance(i.transform.position, hit.point) <= clickRadius)
                         {
                             isNPC = true;
+                            bubblePosition = i.transform.position;
                             break;
                         }
                     }
@@ -63,12 +67,12 @@ public class PlayerController : MonoBehaviour
                 }
 
                 direction = direction.normalized;
-                
+
                 if (isNPC) target -= direction * clickRadius * 3;
             }
             else
             {
-                ResetMovement();
+                ResetMovement(false);
                 
                 anim.SetTrigger("wiggle");
             }
@@ -95,7 +99,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (distanceToTarget <= 0.1f)
                 {
-                    ResetMovement();
+                    ResetMovement(false);
                 }
                 else
                 {
@@ -106,11 +110,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ResetMovement()
+    void ResetMovement(bool endOfMovement)
     {
         moving = false;
         anim.SetBool("isJogging", false);
         anim.SetBool("isWalking", false);
         speedBoost = 1;
+        
+        if (endOfMovement)
+            Instantiate(speechBubble)
+                .GetComponent<SpeechBubble>()
+                    .Generate("This is a test", bubblePosition);
     }
 }
