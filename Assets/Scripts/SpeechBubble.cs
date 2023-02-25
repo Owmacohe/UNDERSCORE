@@ -9,9 +9,7 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] string text;
     [SerializeField] float speed = 0.075f;
     [SerializeField] Sprite corner, triangle;
-    [SerializeField] bool generateOnStart;
 
-    Transform offset;
     TMP_Text txt;
     int currentCharacter;
     Vector2 size;
@@ -21,34 +19,8 @@ public class SpeechBubble : MonoBehaviour
     float cornerSize;
     Image top, bottom, right, left;
 
-    Camera main;
-    Vector3 hoverPosition;
-
     void Start()
     {
-        if (generateOnStart)
-        {
-            Generate(text, Vector3.zero);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (!hoverPosition.Equals(Vector3.zero))
-        {
-            offset.position = main.WorldToScreenPoint(hoverPosition);
-        }
-    }
-
-    public void Generate(string bubbleText, Vector3 hover)
-    {
-        offset = transform.GetChild(0);
-
-        main = Camera.main;
-        
-        text = bubbleText;
-        hoverPosition = hover + Vector3.up * 7.5f;
-        
         txt = GetComponentInChildren<TMP_Text>();
         cornerSize = txt.fontSize;
         
@@ -70,11 +42,9 @@ public class SpeechBubble : MonoBehaviour
 
     void Type()
     {
-        if (currentCharacter <= text.Length)
-        {
-            SetAll(text.Substring(0, currentCharacter++));
-            Invoke(nameof(Type), speed);
-        }
+        SetAll(text.Substring(0, currentCharacter++));
+
+        if (currentCharacter <= text.Length) Invoke(nameof(Type), speed);
     }
 
     void SetAll(string bubbleText)
@@ -100,7 +70,7 @@ public class SpeechBubble : MonoBehaviour
     Image CreateImage(string name, Sprite spr = null)
     {
         GameObject temp = new GameObject(name);
-        temp.transform.SetParent(offset);
+        temp.transform.SetParent(transform);
         temp.transform.SetSiblingIndex(0);
 
         Image img = temp.AddComponent<Image>();

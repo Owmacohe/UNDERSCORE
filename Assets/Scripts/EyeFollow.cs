@@ -6,9 +6,6 @@ public class EyeFollow : MonoBehaviour
 {
     [SerializeField] Transform eyes;
     [SerializeField] Vector2 lookAmount = new Vector2(0.05f, 0.1f);
-    [SerializeField] float blinkInterval = 3;
-    [SerializeField] bool follow = true;
-    [SerializeField] bool blink = true;
 
     Vector3 startPosition;
     bool isBlinking;
@@ -17,19 +14,16 @@ public class EyeFollow : MonoBehaviour
     {
         startPosition = eyes.localPosition;
         
-        if (blink) Invoke(nameof(Blink), Random.Range(blinkInterval, blinkInterval * 2));
+        Invoke(nameof(Blink), 5);
     }
 
     void FixedUpdate()
     {
-        if (follow)
-        {
-            Vector3 normalizedPosition = new Vector2(
-                -lookAmount.x * ((Input.mousePosition.x / Screen.width) - 0.5f),
-                lookAmount.y * ((Input.mousePosition.y / Screen.height) - 0.5f));
+        Vector3 normalizedPosition = new Vector2(
+            -lookAmount.x * ((Input.mousePosition.x / Screen.width) - 0.5f),
+            lookAmount.y * ((Input.mousePosition.y / Screen.height) - 0.5f));
 
-            eyes.localPosition = startPosition + normalizedPosition;
-        }
+        eyes.localPosition = startPosition + normalizedPosition;
     }
 
     void Blink()
@@ -39,6 +33,6 @@ public class EyeFollow : MonoBehaviour
         
         isBlinking = !isBlinking;
 
-        Invoke(nameof(Blink), isBlinking ? 0.5f : Random.Range(blinkInterval, blinkInterval * 2));
+        Invoke(nameof(Blink), isBlinking ? 0.5f : Random.Range(5f, 10f));
     }
 }

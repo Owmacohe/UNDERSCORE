@@ -230,9 +230,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eyes: {fileID: 6119111341564978175}
   lookAmount: {x: 0.05, y: 0.1}
-  blinkInterval: 3
-  follow: 1
-  blink: 1
 --- !u!1 &5455473318631519955
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,4 +516,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   clickRadius: 1.5
-  speechBubble: {fileID: 3699040443254039244, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}
