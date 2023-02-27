@@ -1,80 +1,87 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 10;
     [SerializeField] float clickRadius = 2;
-    [SerializeField] GameObject speechBubble;
-    
+    [SerializeField] ConversationManager convoManager;
+
     Animator anim;
     Rigidbody rb;
-    
+    Camera main;
+
     Vector3 target, direction;
-    bool moving;
+    bool moving, clickedNPC, pointerOverUI;
     float speedBoost;
 
     GameObject[] allNPCs;
-
-    Camera main;
-    Vector3 bubblePosition;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        main = Camera.main;
 
         ResetMovement(false);
 
         allNPCs = GameObject.FindGameObjectsWithTag("NPC");
-        
-        main = Camera.main;
+    }
+
+    void Update()
+    {
+        pointerOverUI = EventSystem.current.IsPointerOverGameObject();
     }
 
     void OnFire()
     {
-        Ray ray = main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out var hit))
+        if (!pointerOverUI)
         {
-            if (Vector3.Distance(transform.position, hit.point) > clickRadius && !hit.transform.gameObject.Equals(gameObject))
-            {
-                bool isNPC = hit.transform.gameObject.CompareTag("NPC");
+            Ray ray = main.ScreenPointToRay(Input.mousePosition);
 
-                if (isNPC) bubblePosition = hit.transform.position;
-                else
+            if (Physics.Raycast(ray, out var hit))
+            {
+                if (Vector3.Distance(transform.position, hit.point) > clickRadius &&
+                    !hit.transform.gameObject.Equals(gameObject))
                 {
-                    foreach (GameObject i in allNPCs)
+                    clickedNPC = hit.transform.gameObject.CompareTag("NPC");
+
+                    if (clickedNPC) convoManager.bubblePosition = hit.transform.position;
+                    else
                     {
-                        if (Vector3.Distance(i.transform.position, hit.point) <= clickRadius)
+                        foreach (GameObject i in allNPCs)
                         {
-                            isNPC = true;
-                            bubblePosition = i.transform.position;
-                            break;
+                            if (Vector3.Distance(i.transform.position, hit.point) <= clickRadius)
+                            {
+                                clickedNPC = true;
+                                convoManager.bubblePosition = i.transform.position;
+                                break;
+                            }
                         }
                     }
+
+                    target = clickedNPC ? hit.transform.position : hit.point;
+                    direction = target - transform.position;
+
+                    moving = true;
+                    anim.SetBool("isWalking", true);
+                    if (direction.magnitude >= 15)
+                    {
+                        anim.SetBool("isJogging", true);
+                        speedBoost = 1.5f;
+                    }
+
+                    direction = direction.normalized;
+
+                    if (clickedNPC) target -= direction * clickRadius * 3;
                 }
-
-                target = isNPC ? hit.transform.position : hit.point;
-                direction = target - transform.position;
-
-                moving = true;
-                anim.SetBool("isWalking", true);
-                if (direction.magnitude >= 15)
+                else
                 {
-                    anim.SetBool("isJogging", true);
-                    speedBoost = 1.5f;
+                    ResetMovement(false);
+
+                    anim.SetTrigger("wiggle");
                 }
-
-                direction = direction.normalized;
-
-                if (isNPC) target -= direction * clickRadius * 3;
-            }
-            else
-            {
-                ResetMovement(false);
-                
-                anim.SetTrigger("wiggle");
             }
         }
     }
@@ -99,7 +106,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (distanceToTarget <= 0.1f)
                 {
-                    ResetMovement(false);
+                    ResetMovement(clickedNPC);
+                    clickedNPC = false;
                 }
                 else
                 {
@@ -116,10 +124,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isJogging", false);
         anim.SetBool("isWalking", false);
         speedBoost = 1;
-        
-        if (endOfMovement)
-            Instantiate(speechBubble)
-                .GetComponent<SpeechBubble>()
-                    .Generate("This is a test", bubblePosition);
+
+        if (endOfMovement) convoManager.NewConversation();
     }
 }

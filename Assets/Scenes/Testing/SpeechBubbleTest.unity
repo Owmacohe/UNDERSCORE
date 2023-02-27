@@ -308,6 +308,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2351430984264212986, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}
+      propertyPath: text
+      value: This is a statement
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351430984264212986, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}
+      propertyPath: generateOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351430984264212986, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}
+      propertyPath: responses.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351430984264212986, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}
+      propertyPath: responses.Array.data[0]
+      value: This is a response
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351430984264212986, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}
+      propertyPath: responses.Array.data[1]
+      value: This is a response
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351430984264212986, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}
+      propertyPath: responses.Array.data[2]
+      value: This is a response
+      objectReference: {fileID: 0}
     - target: {fileID: 3699040443254039244, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}
       propertyPath: m_Name
       value: SpeechBubbleCanvas
@@ -395,6 +419,10 @@ PrefabInstance:
     - target: {fileID: 3699040443254039280, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3699040443254039287, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}
+      propertyPath: generateOnStart
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}

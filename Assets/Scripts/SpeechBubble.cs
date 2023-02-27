@@ -1,59 +1,50 @@
 using System;
 using TMPro;
+using UnityEditor.Events;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SpeechBubble : MonoBehaviour
 {
-    [TextArea(1, 100)]
-    [SerializeField] string text;
-    [SerializeField] float speed = 0.075f;
+    [SerializeField] float speed = 0.1f;
     [SerializeField] Sprite corner, triangle;
-    [SerializeField] bool generateOnStart;
+    
+    string text;
+    RectTransform offset;
 
-    Transform offset;
     TMP_Text txt;
     int currentCharacter;
     Vector2 size;
+    
+    bool isResponse;
+    int responseIndex;
+    float rotationAmount, rotationOffset;
 
     Image background, source;
     Image topRightCorner, topLeftCorner, bottomRightCorner, bottomLeftCorner;
     float cornerSize;
     Image top, bottom, right, left;
 
-    Camera main;
-    Vector3 hoverPosition;
-
-    void Start()
+    public void Generate(
+        string bubbleText,
+        bool response,
+        Vector2 positionOffset,
+        int index = -1,
+        float rotAmount = 0,
+        float rotOffset = 0)
     {
-        if (generateOnStart)
-        {
-            Generate(text, Vector3.zero);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (!hoverPosition.Equals(Vector3.zero))
-        {
-            offset.position = main.WorldToScreenPoint(hoverPosition);
-        }
-    }
-
-    public void Generate(string bubbleText, Vector3 hover)
-    {
-        offset = transform.GetChild(0);
-
-        main = Camera.main;
+        offset = transform.GetChild(0).GetComponent<RectTransform>();
         
-        text = bubbleText;
-        hoverPosition = hover + Vector3.up * 7.5f;
-        
+        isResponse = response;
+
         txt = GetComponentInChildren<TMP_Text>();
         cornerSize = txt.fontSize;
         
+        text = bubbleText;
+        
         background = CreateImage("Background");
-        source = CreateImage("Source", triangle);
+        if (!isResponse) source = CreateImage("Source", triangle);
         
         topRightCorner = CreateImage("TopRightCorner", corner);
         topLeftCorner = CreateImage("TopLeftCorner", corner);
@@ -64,8 +55,27 @@ public class SpeechBubble : MonoBehaviour
         bottom = CreateImage("Bottom");
         right = CreateImage("Right");
         left = CreateImage("Left");
+
+        GetComponent<RectTransform>().anchoredPosition = positionOffset;
         
+        if (isResponse)
+        {
+            responseIndex = index;
+            
+            rotationAmount = rotAmount;
+            rotationOffset = rotOffset;
+
+            txt.GetComponent<RectTransform>().sizeDelta = new Vector2(250 / 3f, 150);
+
+            GetComponentInChildren<Button>().enabled = true;
+        }
+
         Type();
+    }
+
+    public void MakeChoice()
+    {
+        FindObjectOfType<ConversationManager>().MakeChoice(responseIndex);
     }
 
     void Type()
@@ -75,17 +85,24 @@ public class SpeechBubble : MonoBehaviour
             SetAll(text.Substring(0, currentCharacter++));
             Invoke(nameof(Type), speed);
         }
+        else
+        {
+            if (!isResponse) FindObjectOfType<SpeechBubblesManager>().GenerateResponses();
+        }
     }
 
     void SetAll(string bubbleText)
     {
         txt.text = bubbleText;
         SetBubble();
-        
-        RectTransform temp = source.GetComponent<RectTransform>();
-        temp.sizeDelta = Vector2.one * (cornerSize * 1.5f);
-        temp.anchoredPosition = Vector2.down * ((size.y / 2f) + (1.5f * cornerSize));
-        
+
+        if (!isResponse)
+        {
+            RectTransform temp = source.GetComponent<RectTransform>();
+            temp.sizeDelta = Vector2.one * (cornerSize * 1.5f);
+            temp.anchoredPosition = Vector2.down * ((size.y / 2f) + (1.5f * cornerSize));
+        }
+
         SetCorner(topRightCorner, true, true);
         SetCorner(topLeftCorner, true, false);
         SetCorner(bottomRightCorner, false, true);
@@ -95,13 +112,24 @@ public class SpeechBubble : MonoBehaviour
         SetSide(bottom, true, false);
         SetSide(right, false, true);
         SetSide(left, false, false);
+        
+        if (isResponse)
+        {
+            offset.anchoredPosition = Vector2.left * rotationOffset;
+            
+            RectTransform temp = GetComponent<RectTransform>();
+            temp.localRotation = Quaternion.identity;
+            temp.Rotate(Vector3.forward, rotationAmount);
+            
+            offset.rotation = Quaternion.identity;
+        }
     }
 
     Image CreateImage(string name, Sprite spr = null)
     {
         GameObject temp = new GameObject(name);
         temp.transform.SetParent(offset);
-        temp.transform.SetSiblingIndex(0);
+        temp.transform.SetSiblingIndex(1);
 
         Image img = temp.AddComponent<Image>();
         img.sprite = spr;
