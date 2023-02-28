@@ -665,10 +665,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eyes: {fileID: 5044203317969785134}
-  lookAmount: {x: 0.05, y: 0.1}
-  blinkInterval: 3
-  follow: 0
+  follow: 1
+  followType: 1
+  lookAmount: {x: 0.1, y: 0.15}
   blink: 1
+  blinkInterval: 3
+  winkChance: 0.2
 --- !u!1 &5815472808046225639
 GameObject:
   m_ObjectHideFlags: 0

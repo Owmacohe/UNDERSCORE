@@ -129,7 +129,7 @@ public class SpeechBubble : MonoBehaviour
     {
         GameObject temp = new GameObject(name);
         temp.transform.SetParent(offset);
-        temp.transform.SetSiblingIndex(1);
+        temp.transform.SetSiblingIndex(0);
 
         Image img = temp.AddComponent<Image>();
         img.sprite = spr;
