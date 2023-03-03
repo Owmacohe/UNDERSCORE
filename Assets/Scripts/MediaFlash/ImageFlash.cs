@@ -37,7 +37,7 @@ public class ImageFlash : MonoBehaviour
                     Random.Range(-1f, 1f),
                     0);
         
-                rendTransform.rotation = Quaternion.Euler(Vector3.forward * Random.Range(-15f, 15f));
+                rendTransform.rotation = Quaternion.Euler(0, 0, Random.Range(-15f, 15f));
             }
 
             if (Time.time - startShowingTime >= maxShowingTime)

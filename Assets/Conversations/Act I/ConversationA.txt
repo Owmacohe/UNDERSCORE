@@ -4,6 +4,7 @@ Heart attack, big fall, car crash. The list goes on.
 It sucks. It really does. I'm sorry for you.
 But we've had some good times I hope.
 And now you're dead.
+<br>
 Do you still feel the pull?
 
 [0]
@@ -31,6 +32,13 @@ This place will do you good.
 
 [11]
 A lot.
+
+[00,010,020,100,110,120]
+I know you're eager to get going. To move beyond this stagnant place, to feast halls and angelic clouds. That's coming. You'll find this worthwhile.
+<br>
+You know all those little moments that you forgot about? The work that went unnoticed?
+<br>
+We're here to reward you for that. You deserve it for so much effort.
 
 ###
 

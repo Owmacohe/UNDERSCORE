@@ -4,7 +4,6 @@ using UnityEngine;
 public class ConversationManager : MonoBehaviour
 {
     [SerializeField] GameObject speechBubble;
-    [SerializeField] TextAsset conversationFile;
 
     GameObject bubbles;
     [HideInInspector] public Vector3 bubblePosition;
@@ -29,11 +28,13 @@ public class ConversationManager : MonoBehaviour
 
     public class Conversation
     {
+        public Color colour;
         public string current;
         public List<Node> nodes;
 
-        public Conversation(TextAsset txt)
+        public Conversation(TextAsset txt, Color col)
         {
+            colour = col;
             current = "";
             nodes = new List<Node>();
             
@@ -52,20 +53,23 @@ public class ConversationManager : MonoBehaviour
                     }
                     else
                     {
-                        string name = line.Substring(1, lines[i].Length - 2);
-
+                        string[] names = line.Substring(1, lines[i].Length - 2).Split(',');
+                        
                         string temp = "";
 
                         i++;
 
                         while (i < lines.Length && !lines[i].Trim().Equals("") && !lines[i].Trim()[0].Equals('['))
                         {
-                            temp += lines[i].Trim() + "\n";
+                            temp += (lines[i].Trim().Equals("<br>") ? "" : lines[i].Trim()) + "\n";
                             i++;
                         }
                         
-                        if (!isResponses) nodes.Add(new Node(name, temp));
-                        else FindNode(name).responses.Add(temp);
+                        foreach (string name in names)
+                        {
+                            if (!isResponses) nodes.Add(new Node(name, temp));
+                            else FindNode(name).responses.Add(temp);
+                        }
                     }
                 }
             }
@@ -81,19 +85,22 @@ public class ConversationManager : MonoBehaviour
         }
     }
 
-    public void NewConversation()
+    public void NewConversation(NPCController controller)
     {
-        if (!isInConversation)
+        if (!isInConversation && controller.conversation != null)
         {
-            conversation = new Conversation(conversationFile);
+            conversation = new Conversation(controller.conversation, controller.colour);
 
             bubbles = Instantiate(speechBubble, transform);
             bubbles.GetComponent<SpeechBubblesManager>().Generate(
                 conversation.nodes[0].statement,
                 conversation.nodes[0].responses.ToArray(),
-                bubblePosition);
+                bubblePosition,
+                conversation.colour);
             
             isInConversation = true;
+            
+            WaitEndConversation(conversation.FindNode("START"));
         }
     }
 
@@ -109,13 +116,29 @@ public class ConversationManager : MonoBehaviour
             bubbles.GetComponent<SpeechBubblesManager>().Generate(
                 temp.statement,
                 temp.responses.ToArray(),
-                bubblePosition);
+                bubblePosition,
+                conversation.colour);
 
             conversation.current += choice;
+            
+             WaitEndConversation(temp);
         }
         else
         {
-            isInConversation = false;
+            EndConversation();
         }
+    }
+
+    void WaitEndConversation(Node check)
+    {
+        if (check.responses == null || check.responses.Count == 0)
+            Invoke(nameof(EndConversation), check.statement.Length * 0.13f);
+    }
+
+    void EndConversation()
+    {
+        if (bubbles != null) Destroy(bubbles);
+
+        isInConversation = false;
     }
 }

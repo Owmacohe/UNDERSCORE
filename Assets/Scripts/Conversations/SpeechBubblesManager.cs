@@ -17,6 +17,7 @@ public class SpeechBubblesManager : MonoBehaviour
     Camera main;
     Transform offset, responseOffset, player;
     Vector3 hoverPosition;
+    Color bubbleColour;
     string[] responseTexts;
 
     void Start()
@@ -25,7 +26,7 @@ public class SpeechBubblesManager : MonoBehaviour
 
         if (generateOnStart)
         {
-            Generate(text, responses, Vector3.zero, true);
+            Generate(text, responses, Vector3.zero, bubbleColour, true);
         }
     }
     
@@ -38,9 +39,15 @@ public class SpeechBubblesManager : MonoBehaviour
         }
     }
 
-    public void Generate(string bubbleText, string[] responseText, Vector3 bubblePosition, bool fromStart = false)
+    public void Generate(
+        string bubbleText,
+        string[] responseText,
+        Vector3 bubblePosition,
+        Color colour,
+        bool fromStart = false)
     {
         player = GameObject.FindWithTag("Player").transform;
+        bubbleColour = colour;
         
         offset = transform.GetChild(0);
         responseOffset = transform.GetChild(1);
@@ -48,7 +55,7 @@ public class SpeechBubblesManager : MonoBehaviour
         if (!fromStart) hoverPosition = bubblePosition + Vector3.up * (7.5f + (0.0075f * bubbleText.Length));
 
         bubbles.Add(Instantiate(speechBubble, offset).GetComponent<SpeechBubble>());
-        bubbles[0].Generate(bubbleText, false, Vector2.zero);
+        bubbles[0].Generate(bubbleText, bubbleColour, false, Vector2.zero);
 
         responseTexts = responseText;
     }
@@ -62,6 +69,7 @@ public class SpeechBubblesManager : MonoBehaviour
             bubbles.Add(Instantiate(speechBubble, responseOffset).GetComponent<SpeechBubble>());
             bubbles[i+1].Generate(
                 responseTexts[i],
+                Color.white,
                 true,
                 Vector2.zero,
                 i,

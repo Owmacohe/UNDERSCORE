@@ -21,6 +21,7 @@ public class SpeechBubble : MonoBehaviour
     int responseIndex;
     float rotationAmount, rotationOffset;
 
+    Color bubbleColour;
     Image background, source;
     Image topRightCorner, topLeftCorner, bottomRightCorner, bottomLeftCorner;
     float cornerSize;
@@ -28,6 +29,7 @@ public class SpeechBubble : MonoBehaviour
 
     public void Generate(
         string bubbleText,
+        Color colour,
         bool response,
         Vector2 positionOffset,
         int index = -1,
@@ -39,6 +41,7 @@ public class SpeechBubble : MonoBehaviour
         isResponse = response;
 
         txt = GetComponentInChildren<TMP_Text>();
+        bubbleColour = colour;
         cornerSize = txt.fontSize;
         
         text = bubbleText;
@@ -94,6 +97,9 @@ public class SpeechBubble : MonoBehaviour
     void SetAll(string bubbleText)
     {
         txt.text = bubbleText;
+        Color.RGBToHSV(bubbleColour, out float h, out float s, out float v);
+        txt.color = v >= 0.5f ? Color.HSVToRGB(h, s, 0.2f) : Color.HSVToRGB(h, s * 0.2f, 1);
+        
         SetBubble();
 
         if (!isResponse)
@@ -132,6 +138,7 @@ public class SpeechBubble : MonoBehaviour
         temp.transform.SetSiblingIndex(0);
 
         Image img = temp.AddComponent<Image>();
+        img.color = bubbleColour;
         img.sprite = spr;
         
         temp.GetComponent<RectTransform>().localScale = Vector3.one;
