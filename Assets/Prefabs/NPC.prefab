@@ -764,6 +764,7 @@ MonoBehaviour:
   follow: 1
   followType: 1
   lookAmount: {x: 0.1, y: 0.15}
+  head: {fileID: 6336891354808434699}
   blink: 1
   blinkInterval: 3
   winkChance: 0.2
@@ -1049,7 +1050,7 @@ GameObject:
   - component: {fileID: 7736831091566700109}
   - component: {fileID: 5457935767687690701}
   m_Layer: 0
-  m_Name: player.001
+  m_Name: npc.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1318,7 +1319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2304533385421845462}
   m_Layer: 0
-  m_Name: player
+  m_Name: npc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class TerrainManager : MonoBehaviour
 {
+    [Header("FLoor")]
     [SerializeField] GameObject terrain;
     [SerializeField] float terrainSize = 5;
     [SerializeField] Vector2 generateSize = new Vector2(5, 5);
+
+    [Header("Points Of Interest")]
+    [SerializeField] bool generatePointsOfInterest;
     [SerializeField] float bufferDistance = 3;
+    [SerializeField] PathChecker checker;
 
     List<Vector2> coordinates;
     List<Vector2> hasBeenGeneratedAround;
@@ -15,6 +20,8 @@ public class TerrainManager : MonoBehaviour
     GameObject player;
     GameObject[] allNPCs;
     List<GameObject> pointsOfInterest;
+
+    TerrainController lastSpawnedTerrain;
 
     void Start()
     {
@@ -34,6 +41,19 @@ public class TerrainManager : MonoBehaviour
         GenerateAround(0, 0);
     }
 
+    void Update()
+    {
+        if (generatePointsOfInterest && lastSpawnedTerrain != null)
+        {
+            checker.CheckAndDelete(
+                player.transform.position,
+                lastSpawnedTerrain.spawnedNPC.transform.position,
+                lastSpawnedTerrain);
+            
+            lastSpawnedTerrain = null;
+        }
+    }
+
     void Generate(int x, int y)
     {
         if (!coordinates.Contains(new Vector2(x, y)))
@@ -48,8 +68,11 @@ public class TerrainManager : MonoBehaviour
                 Quaternion.identity,
                 transform).GetComponent<TerrainController>();
 
+            temp.generatePointsOfInterest = generatePointsOfInterest;
             temp.pointsOfInterest = new List<GameObject>(pointsOfInterest);
             temp.bufferDistance = bufferDistance;
+
+            lastSpawnedTerrain = temp;
         }
     }
     

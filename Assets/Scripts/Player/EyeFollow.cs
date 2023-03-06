@@ -11,6 +11,7 @@ public class EyeFollow : MonoBehaviour
     enum FollowTypes { Cursor, Player }
     [SerializeField] FollowTypes followType;
     [SerializeField] Vector2 lookAmount = new Vector2(0.1f, 0.15f);
+    //[SerializeField] GameObject head;
     
     [Header("Blink")]
     [SerializeField] bool blink = true;
@@ -47,6 +48,11 @@ public class EyeFollow : MonoBehaviour
             {
                 Vector3 dir = (player.position - transform.position).normalized;
                 temp = new Vector2(dir.x, dir.z);
+
+                /*
+                if (head != null && (transform.position - player.transform.position).z >= 0)
+                    head.transform.LookAt(player.position + Vector3.up * 2.5f);
+                */
             }
             
             Vector2 normalizedPosition = new Vector2(

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sign: {fileID: 7726674457192210829, guid: ea5b6b5849b504b1fad16dc30ed3dd95, type: 3}
   NPC: {fileID: 5386856975671081882, guid: 18dffbfa6c2df4fb7a5f381feaea552a, type: 3}
-  signNumRange: {x: 10, y: 20}
+  signNumRange: {x: 60, y: 60}
   pointsOfInterest: []
   bufferDistance: 0
 --- !u!1 &8710251307144064353

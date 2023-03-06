@@ -46,8 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightRange: {x: 3, y: 7}
+  colours:
+  - {r: 0.59607846, g: 0.35764706, b: 0.35764706, a: 1}
+  - {r: 0.35764706, g: 0.5273414, b: 0.59607846, a: 1}
+  - {r: 0.35764706, g: 0.59607846, b: 0.46719664, a: 1}
+  - {r: 0.5874863, g: 0.59607846, b: 0.35764706, a: 1}
   marker: {fileID: 485026922221927926, guid: c1dad99bd483a4dc580fbb3137f4b76f, type: 3}
-  markerRange: {x: 1, y: 5}
 --- !u!1 &7726674458448429065
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +64,7 @@ GameObject:
   - component: {fileID: 7726674458448429068}
   - component: {fileID: 7726674458448429071}
   - component: {fileID: 4598328215054277094}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +114,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: dc9b76dc87685440993f73c99f0e9178, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

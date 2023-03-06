@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 public class SignController : MonoBehaviour
 {
     [SerializeField] Vector2 heightRange = new Vector2(3, 7);
+    [SerializeField] Color[] colours;
     [SerializeField] GameObject marker;
     
     void Start()
@@ -16,10 +17,14 @@ public class SignController : MonoBehaviour
         pole.localScale = new Vector3(0.5f, height, 0.5f);
 
         for (int i = 0; i < Random.Range(1, height - 1); i++)
-            Instantiate(
+        {
+            MeshRenderer temp = Instantiate(
                 marker,
                 transform.position + (Vector3.up * height / 3f) + (Vector3.up * i * 2),
                 Quaternion.Euler(0, Random.Range(0f, 360f), 0),
-                transform);
+                transform).GetComponentInChildren<MeshRenderer>();
+
+            temp.material.color = colours[Random.Range(0, colours.Length)];
+        }
     }
 }
