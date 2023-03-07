@@ -400,5 +400,13 @@ PrefabInstance:
       propertyPath: text
       value: in the bleak midwinter
       objectReference: {fileID: 0}
+    - target: {fileID: 4701606137990168954, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
+      propertyPath: m_text
+      value: 'Chapter X:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525364296222345111, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
+      propertyPath: m_text
+      value: In which bla bla bla happens
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float clickRadius = 2;
     [SerializeField] ConversationManager convoManager;
     [SerializeField] TerrainManager terrManager;
+    [SerializeField] LayerMask UILayer;
 
     Animator anim;
     Rigidbody rb;

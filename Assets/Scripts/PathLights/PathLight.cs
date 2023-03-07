@@ -24,6 +24,6 @@ public class PathLight : MonoBehaviour
         
         if (rend.color.a < maxOpacity) rend.color = new Color(1, 1, 1, rend.color.a + speed);
 
-        rend.color = new Color(1, 1, 1, rend.color.a * distanceOffset);
+        //rend.color = new Color(1, 1, 1, rend.color.a * distanceOffset);
     }
 }

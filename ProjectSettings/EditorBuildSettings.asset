@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 483fdd4f0cb484336a439b00a5493fd2
+  - enabled: 1
+    path: Assets/Scenes/SignForest.unity
+    guid: bf4372c3c5b5848789eb234a3da5adc7
   m_configObjects: {}

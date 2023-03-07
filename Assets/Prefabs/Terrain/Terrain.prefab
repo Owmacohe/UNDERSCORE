@@ -50,6 +50,7 @@ MonoBehaviour:
   signNumRange: {x: 60, y: 60}
   pointsOfInterest: []
   bufferDistance: 0
+  spawnedNPC: {fileID: 0}
 --- !u!1 &8710251307144064353
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +113,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

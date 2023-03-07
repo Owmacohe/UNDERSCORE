@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ConversationManager : MonoBehaviour
 {
@@ -31,12 +32,16 @@ public class ConversationManager : MonoBehaviour
         public Color colour;
         public string current;
         public List<Node> nodes;
+        public bool switchSceneOnEnd;
+        public string targetScene;
 
-        public Conversation(TextAsset txt, Color col)
+        public Conversation(TextAsset txt, Color col, bool switchScene, string target)
         {
             colour = col;
             current = "";
             nodes = new List<Node>();
+            switchSceneOnEnd = switchScene;
+            targetScene = target;
             
             bool isResponses = false;
             string[] lines = txt.text.Split('\n');
@@ -53,7 +58,7 @@ public class ConversationManager : MonoBehaviour
                     }
                     else
                     {
-                        string[] names = line.Substring(1, lines[i].Length - 2).Split(',');
+                        string[] names = line.Substring(1, lines[i].Length - 3).Split(',');
                         
                         string temp = "";
 
@@ -87,9 +92,16 @@ public class ConversationManager : MonoBehaviour
 
     public void NewConversation(NPCController controller)
     {
-        if (!isInConversation && controller.conversation != null)
+        if (!isInConversation && controller.info.conversation != null)
         {
-            conversation = new Conversation(controller.conversation, controller.colour);
+            NPCController.NPCInformation info = controller.info;
+            
+            conversation = new Conversation(
+                info.conversation,
+                info.colour,
+                info.switchSceneOnEnd,
+                info.targetScene
+            );
 
             bubbles = Instantiate(speechBubble, transform);
             bubbles.GetComponent<SpeechBubblesManager>().Generate(
@@ -99,6 +111,8 @@ public class ConversationManager : MonoBehaviour
                 conversation.colour);
             
             isInConversation = true;
+            
+            print(conversation.nodes[0].name);
             
             WaitEndConversation(conversation.FindNode("START"));
         }
@@ -140,5 +154,12 @@ public class ConversationManager : MonoBehaviour
         if (bubbles != null) Destroy(bubbles);
 
         isInConversation = false;
+
+        if (conversation.switchSceneOnEnd)
+        {
+            SceneManager.LoadScene(conversation.targetScene);
+        }
+
+        conversation = null;
     }
 }

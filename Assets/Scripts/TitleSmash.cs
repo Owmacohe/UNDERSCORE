@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class TitleSmash : MonoBehaviour
 {
+    [SerializeField] float waitBeforeShowing = 3;
     [TextArea(1, 100)]
     [SerializeField] string text;
     enum AnimationType { None, Wiggle, Shake }
     [SerializeField] AnimationType animType = AnimationType.Wiggle;
+    [SerializeField] GameObject chapter, subtitle;
     
     TMP_Text txt;
     TextAnimator anim;
@@ -58,14 +60,20 @@ public class TitleSmash : MonoBehaviour
 
         txt.text = "";
         
+        Invoke(nameof(Show), waitBeforeShowing);
+    }
+
+    void Show()
+    {
         Invoke(nameof(NextLine), 1);
+        chapter.SetActive(true);
     }
 
     void NextLine()
     {
         if (currentWord == numWords)
         {
-            gameObject.SetActive(false);
+            Invoke(nameof(Hide), subtitle.GetComponent<TMP_Text>().text.Length * 0.075f);
         }
         else
         {
@@ -88,8 +96,15 @@ public class TitleSmash : MonoBehaviour
         
             if (currentWord <= numWords)
             {
+                if (currentWord == numWords) subtitle.SetActive(true);
+                
                 Invoke(nameof(NextLine), currentWord < numWords ? waitTime : 3.5f);
             }
         }
+    }
+
+    void Hide()
+    {
+        gameObject.transform.parent.gameObject.SetActive(false);
     }
 }

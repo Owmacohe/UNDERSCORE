@@ -6,6 +6,7 @@ public class TerrainManager : MonoBehaviour
 {
     [Header("FLoor")]
     [SerializeField] GameObject terrain;
+    [SerializeField] Material material;
     [SerializeField] float terrainSize = 5;
     [SerializeField] Vector2 generateSize = new Vector2(5, 5);
 
@@ -23,8 +24,15 @@ public class TerrainManager : MonoBehaviour
 
     TerrainController lastSpawnedTerrain;
 
+    [HideInInspector] public Vector2 currentTerrain;
+    [HideInInspector] public bool generateExtraNPC;
+    [HideInInspector] public NPCController.NPCInformation extraNPCInfo;
+    [HideInInspector] public Transform lastExtraNpcTransform;
+
     void Start()
     {
+        Destroy(transform.GetChild(0).gameObject);
+        
         coordinates = new List<Vector2>();
         hasBeenGeneratedAround = new List<Vector2>();
         
@@ -59,8 +67,6 @@ public class TerrainManager : MonoBehaviour
         if (!coordinates.Contains(new Vector2(x, y)))
         {
             coordinates.Add(new Vector2(x, y));
-
-            if (x == 0 && y == 0) return;
             
             TerrainController temp = Instantiate(
                 terrain,
@@ -68,11 +74,16 @@ public class TerrainManager : MonoBehaviour
                 Quaternion.identity,
                 transform).GetComponent<TerrainController>();
 
-            temp.generatePointsOfInterest = generatePointsOfInterest;
+            if (material != null) temp.GetComponentInChildren<MeshRenderer>().material = material;
+
             temp.pointsOfInterest = new List<GameObject>(pointsOfInterest);
             temp.bufferDistance = bufferDistance;
 
+            temp.Generate(generatePointsOfInterest, generateExtraNPC, extraNPCInfo);
+            generateExtraNPC = false;
+
             lastSpawnedTerrain = temp;
+            if (temp.lastExtraNpcTransform != null) lastExtraNpcTransform = temp.lastExtraNpcTransform;
         }
     }
     
@@ -83,6 +94,8 @@ public class TerrainManager : MonoBehaviour
 
     void GenerateAround(int x, int y)
     {
+        currentTerrain = new Vector2(x, y);
+        
         for (int i = x + -(int) (generateSize.x / 2); i <= x + (int) (generateSize.x / 2); i++)
         {
             for (int j = y + -(int) (generateSize.y / 2); j <= y + (int) (generateSize.y / 2); j++)

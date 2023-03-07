@@ -3,15 +3,49 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    public Color colour;
-    public TextAsset conversation;
-
-    void Start()
+    public class NPCInformation
     {
-        Color.RGBToHSV(colour, out float h, out float s, out _);
-        
-        GetComponentInChildren<Light>().color = Color.HSVToRGB(h, s, 1);
+        public Color colour;
+        public TextAsset conversation;
+        public bool switchSceneOnEnd;
+        public string targetScene;
+
+        public NPCInformation()
+        {
+            colour = Color.white;
+        }
+
+        public NPCInformation(Color col, TextAsset conv, bool switchScene, string target)
+        {
+            colour = col;
+            conversation = conv;
+            switchSceneOnEnd = switchScene;
+            targetScene = target;
+        }
+    }
+
+    [HideInInspector] public NPCInformation info;
+    Light l;
+
+    public void Start()
+    {
+        if (info == null) info = new NPCInformation();
+
+        Color.RGBToHSV(info.colour, out float h, out float s, out _);
+     
+        l = GetComponentInChildren<Light>();
+        l.color = Color.HSVToRGB(h, s, 1);
+        l.intensity = 0;
+
         GetComponentInChildren<SkinnedMeshRenderer>().material.color =
-            colour.Equals(Color.white) ? colour : Color.HSVToRGB(h, 0.2f, 1);
+            info.colour.Equals(Color.white) ? info.colour : Color.HSVToRGB(h, 0.2f, 1);
+    }
+
+    void FixedUpdate()
+    {
+        if (l.intensity < 2)
+        {
+            l.intensity += 0.01f;
+        }
     }
 }
