@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class ImageFlash : MonoBehaviour
@@ -7,19 +8,19 @@ public class ImageFlash : MonoBehaviour
     [SerializeField] Sprite[] images;
     [Range(0, 1)] public float flashChance = 0.001f;
 
-    SpriteRenderer rend;
+    Image img;
     
     bool isShowing;
     float startShowingTime, maxShowingTime;
     
-    Transform rendTransform;
-    Vector3 startPosition;
+    RectTransform imgTransform;
 
     void Start()
     {
-        rend = GetComponentInChildren<SpriteRenderer>();
-        rendTransform = rend.transform;
-        startPosition = rendTransform.localPosition;
+        img = GetComponentInChildren<Image>();
+        imgTransform = img.GetComponent<RectTransform>();
+
+        img.enabled = false;
     }
     
     void FixedUpdate()
@@ -32,26 +33,31 @@ public class ImageFlash : MonoBehaviour
         {
             if (Time.time % 1f == 0)
             {
-                rendTransform.localPosition = startPosition + new Vector3(
-                    Random.Range(-1f, 1f),
-                    Random.Range(-1f, 1f),
+                imgTransform.anchoredPosition = new Vector3(
+                    Random.Range(-100f, 100f),
+                    Random.Range(-100f, 100f),
                     0);
-        
-                rendTransform.rotation = Quaternion.Euler(0, 0, Random.Range(-15f, 15f));
+
+                imgTransform.localRotation = Quaternion.Euler(0, 0, Random.Range(-15f, 15f));
             }
 
             if (Time.time - startShowingTime >= maxShowingTime)
             {
-                rend.sprite = null;
-                isShowing = false;   
+                img.sprite = null;
+                img.enabled = false;
+                isShowing = false;
             }
         }
     }
 
     void ShowRandomImage()
     {
+        img.enabled = true;
+        
         Sprite temp = images[Random.Range(0, images.Length)];
-        rend.sprite = temp;
+        img.sprite = temp;
+        
+        img.SetNativeSize();
 
         isShowing = true;
         startShowingTime = Time.time;

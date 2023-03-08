@@ -1,0 +1,40 @@
+[START]
+Six years to this date, you were sitting in your living room. You were staring at a flashy magazine cover that was covered with an image of thousands of grains of rice.
+
+[0]
+Do you think that they were arranged like that on purpose?
+
+[1]
+Understandable. They can't have arranged all of the gains themselves. Could they?
+
+[01,11]
+That's human then, I suppose. Very human.
+I guess the grains made it onto the page because they wanted to. Against the highly scrutinized hand of the graphic designer.
+
+[010,110]
+If you say so.
+
+[00,10,011,111]
+I know you want to feel like someone is listening. Creating just for you. You've felt that pull your whole life. Sometimes it was true. Sometimes not.
+<br>
+It's true now.
+
+###
+
+[START]
+They all looked so orderly.
+
+[START]
+It was so busy and hard to look at.
+
+[0,1]
+It was a huge publication. Of course it was curated.
+
+[0,1]
+Sometimes these things just... slip through the cracks.
+
+[01,11]
+That's stupid.
+
+[01,11]
+That's kind of beautiful.

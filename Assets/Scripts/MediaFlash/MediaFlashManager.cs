@@ -13,7 +13,7 @@ public class MediaFlashManager : MonoBehaviour
         vidFlash = GetComponentInChildren<VideoFlash>();
         imgFlash = GetComponentInChildren<ImageFlash>();
 
-        vidFlash.flashChance = flashChance;
-        imgFlash.flashChance = flashChance;
+        if (vidFlash != null) vidFlash.flashChance = flashChance;
+        if (imgFlash != null) imgFlash.flashChance = flashChance;
     }
 }

@@ -18,7 +18,8 @@ Either you're lying or you've broken something deep inside. And lying in this pl
 Maybe a little look inside would help to get things stirring again.
 
 [01]
-I don't really know. This is my first time too.
+It's complicated. A bit of you, a bit of me.
+A bit of some others.
 But it's okay, we'll stick together.
 Right?
 
@@ -56,12 +57,6 @@ What's inside?
 [0]
 How long do I have to be here?
 
-[01]
-Right.
-
-[02]
-...
-
 [1]
 I can't go back.
 
@@ -70,6 +65,12 @@ Will it hurt?
 
 [1]
 Let me in.
+
+[01]
+Right.
+
+[02]
+...
 
 [10]
 Okay.

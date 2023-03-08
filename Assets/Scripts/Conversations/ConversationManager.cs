@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,21 +7,23 @@ public class ConversationManager : MonoBehaviour
 {
     [SerializeField] GameObject speechBubble;
     [SerializeField] TextAsset[] conversationOrder;
+    [SerializeField] Color[] colourOrder;
+    [SerializeField] bool[] repeatableOrder;
 
     GameObject bubbles;
     [HideInInspector] public Vector3 bubblePosition;
 
     int currentConversation;
     bool isInConversation;
-    Conversation conversation;
     NPCController.NPCInformation info;
+
+    PlayerController player;
     
     public class Node
     {
         public string name;
         public string statement;
         public List<string> responses;
-        public List<string> targets;
 
         public Node(string n, string s)
         {
@@ -36,7 +39,7 @@ public class ConversationManager : MonoBehaviour
         public string current;
         public List<Node> nodes;
 
-        public Conversation(TextAsset txt, Color col, bool switchScene, string target)
+        public Conversation(TextAsset txt, Color col)
         {
             colour = col;
             current = "";
@@ -95,36 +98,48 @@ public class ConversationManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+    }
+
     public void NewConversation(NPCController controller)
     {
+        // null && less
+        // !null && repeatable
+        
         if (!isInConversation &&
-            currentConversation < conversationOrder.Length &&
-            controller.info != null &&
-            !controller.info.hasCompleted)
+            (controller.info == null && currentConversation < conversationOrder.Length) ||
+            (controller.info != null && controller.info.repeatable))
         {
+            if (controller.info == null || !controller.info.repeatable)
+            {
+                Conversation temp = new Conversation(
+                    conversationOrder[currentConversation],
+                    colourOrder[currentConversation]
+                );
+            
+                controller.info = new NPCController.NPCInformation(temp, repeatableOrder[currentConversation]);
+                
+                currentConversation++;
+            }
+
             info = controller.info;
-            
-            if (info.conversation == null) info.conversation = conversationOrder[currentConversation++];
-            
-            conversation = new Conversation(
-                info.conversation,
-                info.colour,
-                info.switchSceneOnEnd,
-                info.targetScene
-            );
+            info.conversation.current = "";
 
             bubbles = Instantiate(speechBubble, transform);
             bubbles.GetComponent<SpeechBubblesManager>().Generate(
-                conversation.nodes[0].statement,
-                conversation.nodes[0].responses.ToArray(),
+                info.conversation.nodes[0].statement,
+                info.conversation.nodes[0].responses.ToArray(),
                 bubblePosition,
-                conversation.colour);
+                info.conversation.colour);
             
             isInConversation = true;
-            
-            print(conversation.nodes[0].name);
-            
-            WaitEndConversation(conversation.FindNode("START"));
+            player.pauseMovement = true;
+
+            controller.hasInteracted = true;
+
+            WaitEndConversation(info.conversation.FindNode("START"));
         }
     }
 
@@ -132,7 +147,7 @@ public class ConversationManager : MonoBehaviour
     {
         Destroy(bubbles);
 
-        Node temp = conversation.FindNode(conversation.current + choice);
+        Node temp = info.conversation.FindNode(info.conversation.current + choice);
 
         if (temp != null)
         {
@@ -141,9 +156,9 @@ public class ConversationManager : MonoBehaviour
                 temp.statement,
                 temp.responses.ToArray(),
                 bubblePosition,
-                conversation.colour);
+                info.conversation.colour);
 
-            conversation.current += choice;
+            info.conversation.current += choice;
             
              WaitEndConversation(temp);
         }
@@ -156,7 +171,7 @@ public class ConversationManager : MonoBehaviour
     void WaitEndConversation(Node check)
     {
         if (check.responses == null || check.responses.Count == 0)
-            Invoke(nameof(EndConversation), check.statement.Length * 0.13f);
+            Invoke(nameof(EndConversation), check.statement.Length * 0.05f);
     }
 
     void EndConversation()
@@ -164,14 +179,10 @@ public class ConversationManager : MonoBehaviour
         if (bubbles != null) Destroy(bubbles);
 
         isInConversation = false;
+        player.pauseMovement = false;
 
-        info.hasCompleted = true;
+        info.completed = true;
 
-        if (info.switchSceneOnEnd)
-        {
-            SceneManager.LoadScene(info.targetScene);
-        }
-
-        conversation = null;
+        if (info.switchSceneOnEnd) SceneManager.LoadScene(info.targetScene);
     }
 }

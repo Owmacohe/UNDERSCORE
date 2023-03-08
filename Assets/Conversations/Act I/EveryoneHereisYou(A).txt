@@ -1,0 +1,18 @@
+[START]
+Do you understand yet?
+
+[0]
+You're not ready for that.
+<br>
+Keep moving.
+
+[1]
+At least you're honest.
+
+###
+
+[START]
+Understand what?
+
+[START]
+No.

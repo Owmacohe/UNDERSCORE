@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float clickRadius = 2;
     [SerializeField] ConversationManager convoManager;
     [SerializeField] TerrainManager terrManager;
-    [SerializeField] LayerMask UILayer;
 
     Animator anim;
     Rigidbody rb;
@@ -69,6 +68,17 @@ public class PlayerController : MonoBehaviour
                                 }
                             }
                         }
+                        
+                        if (clickedNPC)
+                        {
+                            targetController = hit.transform.GetComponent<NPCController>();
+                            
+                            if (Vector3.Distance(transform.position, hit.transform.position) <= clickRadius)
+                            {
+                                ResetMovement(true, targetController);
+                                return;   
+                            }
+                        }
 
                         target = clickedNPC ? hit.transform.position : hit.point;
                         direction = target - transform.position;
@@ -83,11 +93,7 @@ public class PlayerController : MonoBehaviour
 
                         direction = direction.normalized;
 
-                        if (clickedNPC)
-                        {
-                            target -= direction * clickRadius * 3;
-                            targetController = hit.transform.GetComponent<NPCController>();
-                        }
+                        if (clickedNPC) target -= direction * clickRadius * 3;
                     }
                     else
                     {
@@ -146,13 +152,10 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.parent != null && collision.transform.parent.gameObject.CompareTag("Terrain"))
-        {
+        if (!collision.gameObject.CompareTag("NPC") &&
+            collision.transform.parent != null &&
+            collision.transform.parent.gameObject.CompareTag("Terrain"))
             terrManager.GenerateAround(collision.transform.position);
-        }
-        else
-        {
-            ResetMovement(clickedNPC && collision.gameObject.CompareTag("NPC"), targetController);
-        }
+        else ResetMovement(clickedNPC && collision.gameObject.CompareTag("NPC"), targetController);
     }
 }

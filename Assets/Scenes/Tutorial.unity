@@ -226,6 +226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 4067558126636063852, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: m_TargetCamera
+      value: 
+      objectReference: {fileID: 4741910204307373192}
     - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: material
       value: 
@@ -443,3 +447,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43b62d34d7c7f4dfb95228fe977ec85e, type: 3}
+--- !u!20 &4741910204307373192 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4741910205835402085, guid: 43b62d34d7c7f4dfb95228fe977ec85e, type: 3}
+  m_PrefabInstance: {fileID: 4741910204307373191}
+  m_PrefabAsset: {fileID: 0}

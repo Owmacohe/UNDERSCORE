@@ -24,8 +24,9 @@ public class VideoFlash : MonoBehaviour
         }
         else if (isPlaying && !vid.isPlaying)
         {
-            vid.clip = null;
+            print("test");
             isPlaying = false;
+            vid.clip = null;
         }
     }
 

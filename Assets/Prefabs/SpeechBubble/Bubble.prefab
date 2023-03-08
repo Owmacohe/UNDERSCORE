@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8733a375a193461981383596e276e3ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
+  speed: 0
   corner: {fileID: 21300000, guid: 434823a04fa5646e38df96712384a8c9, type: 3}
   triangle: {fileID: 21300000, guid: 9630387473ff74cc88eac943909cf025, type: 3}
 --- !u!1 &7612054049694418948

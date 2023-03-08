@@ -28,8 +28,14 @@ public class Tutorial : MonoBehaviour
             if (tutorialProgress == 0)
             {
                 tips.ShowTip("You're almost there!", Vector3.right * -20, 3, 2);
+                
                 terrains.generateExtraNPC = true;
-                terrains.extraNPCInfo = new NPCController.NPCInformation(colour, conversation, true, "SignForest");
+                terrains.extraNPCInfo = new NPCController.NPCInformation(
+                    new ConversationManager.Conversation(conversation, colour),
+                    false,
+                    true,
+                    "SignForest"
+                );
                 
                 tutorialProgress++;
             }
