@@ -27,18 +27,18 @@ public class NPCController : MonoBehaviour
     [HideInInspector] public NPCInformation info;
     Light l;
 
-    public void Start()
+    void Start()
     {
-        if (info == null) info = new NPCInformation();
-
-        Color.RGBToHSV(info.colour, out float h, out float s, out _);
+        Color temp = info == null ? Color.white : info.colour;
+        
+        Color.RGBToHSV(temp, out float h, out float s, out _);
      
         l = GetComponentInChildren<Light>();
         l.color = Color.HSVToRGB(h, s, 1);
         l.intensity = 0;
 
         GetComponentInChildren<SkinnedMeshRenderer>().material.color =
-            info.colour.Equals(Color.white) ? info.colour : Color.HSVToRGB(h, 0.2f, 1);
+            temp.Equals(Color.white) ? temp : Color.HSVToRGB(h, 0.2f, 1);
     }
 
     void FixedUpdate()

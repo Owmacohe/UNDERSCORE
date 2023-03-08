@@ -14,6 +14,7 @@ Want to take a peek inside?
 
 [1]
 Either you're lying or you've broken something deep inside. And lying in this place is... difficult.
+<br>
 Maybe a little look inside would help to get things stirring again.
 
 [01]
@@ -33,12 +34,10 @@ This place will do you good.
 [11]
 A lot.
 
-[00,010,020,100,110,120]
+[00,010,020,100,110,12]
 I know you're eager to get going. To move beyond this stagnant place, to feast halls and angelic clouds. That's coming. You'll find this worthwhile.
 <br>
-You know all those little moments that you forgot about? The work that went unnoticed?
-<br>
-We're here to reward you for that. You deserve it for so much effort.
+You know all those little moments that you forgot about? The work that went unnoticed? We're here to reward you for that. You deserve it for so much effort.
 
 ###
 

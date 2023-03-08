@@ -66,7 +66,6 @@ public class TerrainController : MonoBehaviour
             {
                 NPCController controller = temp.GetComponentInChildren<NPCController>();
                 controller.info = extraInfo;
-                controller.Start();
             }
         }
     }

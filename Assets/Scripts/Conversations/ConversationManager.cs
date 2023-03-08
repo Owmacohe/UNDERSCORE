@@ -73,7 +73,11 @@ public class ConversationManager : MonoBehaviour
                         foreach (string name in names)
                         {
                             if (!isResponses) nodes.Add(new Node(name, temp));
-                            else FindNode(name).responses.Add(temp);
+                            else
+                            {
+                                print(name);
+                                FindNode(name).responses.Add(temp);
+                            }
                         }
                     }
                 }
@@ -92,7 +96,7 @@ public class ConversationManager : MonoBehaviour
 
     public void NewConversation(NPCController controller)
     {
-        if (!isInConversation && controller.info.conversation != null)
+        if (!isInConversation && controller.info != null && controller.info.conversation != null)
         {
             NPCController.NPCInformation info = controller.info;
             

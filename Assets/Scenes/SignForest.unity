@@ -239,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6525364296222345111, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
       propertyPath: m_text
-      value: In which death comes swift and thanks are given
+      value: In which the plot thickens and deeds are remembered
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}

@@ -1,0 +1,94 @@
+[START]
+Three months ago, you were carrying a canvas back home with you on the subway. It was heavy, and extremely eye-catching. People were definitely staring.
+<br>
+Do you remember that?
+
+[0,210]
+How did that make you feel?
+
+[1,20]
+That's okay. These things will come back as you focus on them. Nothing is lost, even in death.
+<br>
+Are you sure you don't remember anything?
+
+[2]
+Isn't this what you're here for? Recognition?
+For someone to finally just get it?
+
+[21]
+Then let me in.
+
+[00,2100]
+You were! No one would ever know the work you put into that painting. They would only know its content, when unravelled.
+<br>
+The interested yet dull eyes of those around you were obvious enough.
+
+[01,2101,10,200]
+The weight of the wood and fabric beneath your fingers was greater than any yoke or binding contract. It's okay, that weight's gone now.
+
+[12,202]
+You were worried for the watercolours. They drip drip drained so easily. All that work, washed away.
+<br>
+It's okay, we shared that loss together, even if you weren't aware at the time.
+
+[11,201,211]
+Then I can't help you. If I may, let me leave you with this wisdom:
+<br>
+You are dead. Take advantage of that fact, and breathe.
+
+[000,21000,010,21010,100,2000,120,2020]
+The pleasure is mine. There is more I can do to help, however. It's time to move on.
+<br>
+What about this memory would you like us to forget?
+
+[0000,210000,0100,210100,1000,20000,1200,20200,0001,210001,0101,210101,1001,20001,1201,20201,0002,210002,0102,210102,1002,20002,1202,20202]
+It is done.
+<br>
+Keep moving.
+
+###
+
+[START]
+I think so.
+
+[START]
+It's too hazy to look back that far.
+
+[START]
+What does it matter?
+
+[2]
+I don't know why I'm here.
+
+[2]
+That's what I keep telling myself.
+
+[21]
+Okay.
+
+[21]
+No.
+
+[0,210]
+I remember I was so excited.
+
+[0,210,1,20]
+I remember I was tired.
+
+[1,20]
+Nothing. It's gone. It's all gone.
+
+[1,20]
+I remember it was raining.
+
+[00,2100,01,2101,10,200,12,202]
+Thank you.
+
+[000,21000,010,21010,100,2000,120,2020]
+What I saw.
+
+[000,21000,010,21010,100,2000,120,2020]
+How I felt.
+
+[000,21000,010,21010,100,2000,120,2020]
+What happened.
