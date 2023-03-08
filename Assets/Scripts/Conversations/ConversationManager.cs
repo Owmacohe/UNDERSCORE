@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 public class ConversationManager : MonoBehaviour
 {
     [SerializeField] GameObject speechBubble;
+    [SerializeField] TextAsset[] conversationOrder;
 
     GameObject bubbles;
     [HideInInspector] public Vector3 bubblePosition;
 
+    int currentConversation;
     bool isInConversation;
     Conversation conversation;
+    NPCController.NPCInformation info;
     
     public class Node
     {
@@ -32,16 +35,12 @@ public class ConversationManager : MonoBehaviour
         public Color colour;
         public string current;
         public List<Node> nodes;
-        public bool switchSceneOnEnd;
-        public string targetScene;
 
         public Conversation(TextAsset txt, Color col, bool switchScene, string target)
         {
             colour = col;
             current = "";
             nodes = new List<Node>();
-            switchSceneOnEnd = switchScene;
-            targetScene = target;
             
             bool isResponses = false;
             string[] lines = txt.text.Split('\n');
@@ -75,8 +74,10 @@ public class ConversationManager : MonoBehaviour
                             if (!isResponses) nodes.Add(new Node(name, temp));
                             else
                             {
-                                print(name);
-                                FindNode(name).responses.Add(temp);
+                                Node tempNode = FindNode(name);
+
+                                if (tempNode == null) Debug.Log("No node with name: \"" + name + "\" found!");
+                                else tempNode.responses.Add(temp);
                             }
                         }
                     }
@@ -96,9 +97,14 @@ public class ConversationManager : MonoBehaviour
 
     public void NewConversation(NPCController controller)
     {
-        if (!isInConversation && controller.info != null && controller.info.conversation != null)
+        if (!isInConversation &&
+            currentConversation < conversationOrder.Length &&
+            controller.info != null &&
+            !controller.info.hasCompleted)
         {
-            NPCController.NPCInformation info = controller.info;
+            info = controller.info;
+            
+            if (info.conversation == null) info.conversation = conversationOrder[currentConversation++];
             
             conversation = new Conversation(
                 info.conversation,
@@ -159,9 +165,11 @@ public class ConversationManager : MonoBehaviour
 
         isInConversation = false;
 
-        if (conversation.switchSceneOnEnd)
+        info.hasCompleted = true;
+
+        if (info.switchSceneOnEnd)
         {
-            SceneManager.LoadScene(conversation.targetScene);
+            SceneManager.LoadScene(info.targetScene);
         }
 
         conversation = null;

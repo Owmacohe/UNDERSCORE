@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tips: {fileID: 1390431971}
   terrains: {fileID: 1110942397}
-  colour: {r: 0.5866203, g: 0.40183342, b: 0.6603774, a: 1}
+  colour: {r: 1, g: 0.7666667, b: 0, a: 1}
   conversation: {fileID: 4900000, guid: 133bcc3e7044f4928862826e59ee2bc4, type: 3}
 --- !u!1001 &1110942396
 PrefabInstance:

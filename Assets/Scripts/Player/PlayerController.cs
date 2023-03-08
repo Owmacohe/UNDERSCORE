@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
 
     GameObject[] allNPCs;
 
+    [HideInInspector] public bool pauseMovement;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
-        if (!pointerOverUI)
+        if (!pauseMovement && !pointerOverUI)
         {
             Ray ray = main.ScreenPointToRay(Input.mousePosition);
 
@@ -100,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (moving)
+        if (!pauseMovement && moving)
         {
             float distanceToTarget = Vector3.Distance(transform.position, target);
             float speedFactor = speed * 0.001f * distanceToTarget * speedBoost;
@@ -128,6 +130,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        if (pauseMovement && moving) ResetMovement(false);
     }
 
     void ResetMovement(bool startConvo, NPCController controller = null)

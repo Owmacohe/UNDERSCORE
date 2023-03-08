@@ -16,6 +16,7 @@ public class TitleSmash : MonoBehaviour
     TMP_Text txt;
     TextAnimator anim;
     AudioSource src;
+    PlayerController player;
     
     List<string> words = new List<string>();
     int currentWord, numWords;
@@ -29,6 +30,9 @@ public class TitleSmash : MonoBehaviour
         txt = GetComponent<TMP_Text>();
         anim = GetComponent<TextAnimator>();
         src = GetComponent<AudioSource>();
+
+        GameObject tempPlayer = GameObject.FindWithTag("Player");
+        if (tempPlayer != null) player = tempPlayer.GetComponent<PlayerController>();
 
         if (text is "" or " ") text = txt.text;
 
@@ -67,6 +71,7 @@ public class TitleSmash : MonoBehaviour
     {
         Invoke(nameof(NextLine), 1);
         chapter.SetActive(true);
+        if (player != null) player.pauseMovement = true;
     }
 
     void NextLine()
@@ -106,5 +111,6 @@ public class TitleSmash : MonoBehaviour
     void Hide()
     {
         gameObject.transform.parent.gameObject.SetActive(false);
+        if (player != null) player.pauseMovement = false;
     }
 }

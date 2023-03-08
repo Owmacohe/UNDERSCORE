@@ -52,7 +52,7 @@ public class SpeechBubblesManager : MonoBehaviour
         offset = transform.GetChild(0);
         responseOffset = transform.GetChild(1);
 
-        if (!fromStart) hoverPosition = bubblePosition + Vector3.up * (7.5f + (0.0075f * bubbleText.Length));
+        if (!fromStart) hoverPosition = bubblePosition + Vector3.up * (7.5f + (0.003f * bubbleText.Length));
 
         bubbles.Add(Instantiate(speechBubble, offset).GetComponent<SpeechBubble>());
         bubbles[0].Generate(bubbleText, bubbleColour, false, Vector2.zero);

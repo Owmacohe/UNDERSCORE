@@ -229,6 +229,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TitleSmashCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 49870965524103972, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 49870967412993532, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
       propertyPath: text
       value: underscore
@@ -309,6 +313,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: conversationOrder.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: conversationOrder.Array.data[0]
+      value: 
+      objectReference: {fileID: 4900000, guid: bdebaae7b78fa8743ac1ed96a961375f, type: 3}
     - target: {fileID: 6701508800864856724, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: segmentLength
       value: 1
