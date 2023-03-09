@@ -74,7 +74,7 @@ public class SpeechBubblesManager : MonoBehaviour
                 Vector2.zero,
                 i,
                 interval * (i + 1),
-                220);
+                170);
         }
     }
 }

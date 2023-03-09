@@ -1,2 +1,10 @@
 [START]
-This is a test. This is a test. This is a test. This is a test. This is a test.
+This is a test. This is some more text. Oh wow!
+
+###
+
+[START:1]
+Hello.
+
+[START:-1]
+Goodbye!

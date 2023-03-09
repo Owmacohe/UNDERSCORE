@@ -42,10 +42,10 @@ You know all those little moments that you forgot about? The work that went unno
 
 ###
 
-[START]
+[START:0.5]
 Yes.
 
-[START]
+[START:-0.5]
 No.
 
 [0]

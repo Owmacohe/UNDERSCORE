@@ -9,10 +9,11 @@ public class Tutorial : MonoBehaviour
     [SerializeField] TextAsset conversation;
 
     int tutorialProgress = -1;
-    float initialWaitTime = 22; // 22
 
     void Start()
     {
+        float initialWaitTime = 22; // 22
+        
         tips.ShowTip("Hey you", Vector3.forward * 10, 5, initialWaitTime);
         tips.ShowTip("Can you hear me?", Vector3.forward * 15 + Vector3.right * 20, 5, initialWaitTime + 2);
         tips.ShowTip("<b>[CLICK]</b> over here!", Vector3.right * -20, 7.5f, initialWaitTime + 5);

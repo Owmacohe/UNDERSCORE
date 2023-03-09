@@ -11,8 +11,8 @@ At least you're honest.
 
 ###
 
-[START]
+[START:0.1]
 Understand what?
 
-[START]
+[START:-0.1]
 No.

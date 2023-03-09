@@ -39,7 +39,7 @@ public class TipController : MonoBehaviour
     {
         if (startOnPlayer) position += playerTransform.position;
         
-        GetComponent<TextAnimatorPlayer>().ShowText(txt);
+        GetComponent<TextAnimatorPlayer>().ShowText("<shake a=0.1>" + txt + "</shake>");
         Invoke(nameof(Hide), waitTime);
     }
 

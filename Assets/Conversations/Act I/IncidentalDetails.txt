@@ -5,7 +5,7 @@ Six years to this date, you were sitting in your living room. You were staring a
 Do you think that they were arranged like that on purpose?
 
 [1]
-Understandable. They can't have arranged all of the gains themselves. Could they?
+Understandable. They can't have arranged all of the grains themselves. Could they?
 
 [01,11]
 That's human then, I suppose. Very human.
@@ -27,14 +27,14 @@ They all looked so orderly.
 [START]
 It was so busy and hard to look at.
 
-[0,1]
+[0,1:-0.1]
 It was a huge publication. Of course it was curated.
 
-[0,1]
+[0,1:0.1]
 Sometimes these things just... slip through the cracks.
 
-[01,11]
+[01,11:-0.3]
 That's stupid.
 
-[01,11]
+[01,11:0.3]
 That's kind of beautiful.

@@ -25,12 +25,14 @@ public class ConversationManager : MonoBehaviour
         public string name;
         public string statement;
         public List<string> responses;
+        public List<float> awarenessChange;
 
         public Node(string n, string s)
         {
             name = n;
             statement = s;
             responses = new List<string>();
+            awarenessChange = new List<float>();
         }
     }
 
@@ -43,7 +45,7 @@ public class ConversationManager : MonoBehaviour
         public Conversation(TextAsset txt, Color col)
         {
             colour = col;
-            current = "";
+            current = "START";
             nodes = new List<Node>();
             
             bool isResponses = false;
@@ -61,7 +63,10 @@ public class ConversationManager : MonoBehaviour
                     }
                     else
                     {
-                        string[] names = line.Substring(1, lines[i].Length - 3).Split(',');
+                        string[] namesAndAwareness = line
+                            .Substring(1, lines[i].Trim().Length - 2)
+                            .Split(':');
+                        string[] names = namesAndAwareness[0].Split(',');
                         
                         string temp = "";
 
@@ -80,8 +85,15 @@ public class ConversationManager : MonoBehaviour
                             {
                                 Node tempNode = FindNode(name);
 
-                                if (tempNode == null) Debug.Log("No node with name: \"" + name + "\" found!");
-                                else tempNode.responses.Add(temp);
+                                if (tempNode == null)
+                                    Debug.Log("No node with name: \"" + name + "\" found!");
+                                else
+                                {
+                                    tempNode.responses.Add(temp);
+                                    
+                                    tempNode.awarenessChange.Add(
+                                        namesAndAwareness.Length == 2 ? float.Parse(namesAndAwareness[1]) : 0);
+                                }
                             }
                         }
                     }
@@ -119,7 +131,6 @@ public class ConversationManager : MonoBehaviour
             }
 
             info = controller.info;
-            info.conversation.current = "";
 
             bubbles = Instantiate(speechBubble, transform);
             bubbles.GetComponent<SpeechBubblesManager>().Generate(
@@ -139,6 +150,13 @@ public class ConversationManager : MonoBehaviour
 
     public void MakeChoice(int choice)
     {
+        AwarenessManager manager = GameObject.FindWithTag("Player").GetComponent<AwarenessManager>();
+        
+        if (!info.completed)
+            manager.UpdateAwareness(info.conversation.FindNode(info.conversation.current).awarenessChange[choice]);
+
+        if (info.conversation.current.Equals("START")) info.conversation.current = "";
+        
         Destroy(bubbles);
 
         Node temp = info.conversation.FindNode(info.conversation.current + choice);
