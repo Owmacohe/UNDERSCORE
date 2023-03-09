@@ -9,7 +9,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] TextAsset conversation;
 
     int tutorialProgress = -1;
-    float initialWaitTime = 20; // 20
+    float initialWaitTime = 22; // 22
 
     void Start()
     {
@@ -33,6 +33,7 @@ public class Tutorial : MonoBehaviour
                 terrains.extraNPCInfo = new NPCController.NPCInformation(
                     new ConversationManager.Conversation(conversation, colour),
                     false,
+                    true,
                     true,
                     "SignForest"
                 );

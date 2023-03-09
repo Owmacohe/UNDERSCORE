@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ConversationManager : MonoBehaviour
 {
     [SerializeField] GameObject speechBubble;
+    [SerializeField] bool ignoreOrder;
     [SerializeField] TextAsset[] conversationOrder;
     [SerializeField] Color[] colourOrder;
     [SerializeField] bool[] repeatableOrder;
@@ -13,8 +14,8 @@ public class ConversationManager : MonoBehaviour
     GameObject bubbles;
     [HideInInspector] public Vector3 bubblePosition;
 
-    int currentConversation;
-    bool isInConversation;
+    [HideInInspector] public int currentConversation;
+    [HideInInspector] public bool isInConversation;
     NPCController.NPCInformation info;
 
     PlayerController player;
@@ -105,23 +106,16 @@ public class ConversationManager : MonoBehaviour
 
     public void NewConversation(NPCController controller)
     {
-        // null && less
-        // !null && repeatable
-        
         if (!isInConversation &&
             (controller.info == null && currentConversation < conversationOrder.Length) ||
-            (controller.info != null && controller.info.repeatable))
+            (controller.info != null && (controller.info.repeatable || controller.info.ignoreOrder)))
         {
-            if (controller.info == null || !controller.info.repeatable)
+            if (controller.info == null || (!controller.info.repeatable && !controller.info.ignoreOrder))
             {
-                Conversation temp = new Conversation(
-                    conversationOrder[currentConversation],
-                    colourOrder[currentConversation]
+                controller.info = new NPCController.NPCInformation(
+                    new Conversation(conversationOrder[currentConversation], colourOrder[currentConversation]),
+                    repeatableOrder[currentConversation]
                 );
-            
-                controller.info = new NPCController.NPCInformation(temp, repeatableOrder[currentConversation]);
-                
-                currentConversation++;
             }
 
             info = controller.info;
@@ -171,7 +165,7 @@ public class ConversationManager : MonoBehaviour
     void WaitEndConversation(Node check)
     {
         if (check.responses == null || check.responses.Count == 0)
-            Invoke(nameof(EndConversation), check.statement.Length * 0.05f);
+            Invoke(nameof(EndConversation), check.statement.Length * 0.1f);
     }
 
     void EndConversation()
@@ -182,6 +176,8 @@ public class ConversationManager : MonoBehaviour
         player.pauseMovement = false;
 
         info.completed = true;
+        
+        if (!info.ignoreOrder) currentConversation++;
 
         if (info.switchSceneOnEnd) SceneManager.LoadScene(info.targetScene);
     }

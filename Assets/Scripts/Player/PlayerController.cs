@@ -156,6 +156,11 @@ public class PlayerController : MonoBehaviour
             collision.transform.parent != null &&
             collision.transform.parent.gameObject.CompareTag("Terrain"))
             terrManager.GenerateAround(collision.transform.position);
-        else ResetMovement(clickedNPC && collision.gameObject.CompareTag("NPC"), targetController);
+        else ResetMovement(
+            clickedNPC &&
+            collision.gameObject.CompareTag("NPC") &&
+            targetController.gameObject.Equals(collision.gameObject),
+            targetController
+        );
     }
 }

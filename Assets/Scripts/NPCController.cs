@@ -7,13 +7,14 @@ public class NPCController : MonoBehaviour
     public class NPCInformation
     {
         public ConversationManager.Conversation conversation;
-        public bool switchSceneOnEnd, completed, repeatable;
+        public bool switchSceneOnEnd, completed, repeatable, ignoreOrder;
         public string targetScene;
 
-        public NPCInformation(ConversationManager.Conversation conv, bool repeat = false, bool switchScene = false, string target = "")
+        public NPCInformation(ConversationManager.Conversation conv, bool repeat = false, bool ignore = false, bool switchScene = false, string target = "")
         {
             conversation = conv;
             repeatable = repeat;
+            ignoreOrder = ignore;
             switchSceneOnEnd = switchScene;
             targetScene = target;
         }
