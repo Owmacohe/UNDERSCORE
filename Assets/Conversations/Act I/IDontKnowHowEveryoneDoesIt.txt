@@ -1,0 +1,68 @@
+[START]
+Can I confide something in you?
+
+[2]
+Why so eager to hear?
+
+[0,1,20]
+I don't know how anyone does it.
+Their lives, spinning like comets through the trajectories of life. I wonder, how brightly does my own cosmic flare glow?
+
+[00,10,200]
+Thank you. So much. I thought I was alone.
+
+[01,11,201]
+Figures as much. No one's a protagonist.
+
+[02,12,202]
+I see myself.
+
+[000,100,2000,010,110,2010]
+Good. Here's a passing thought: Who does everyone else talk to when they die?
+
+[020,120,2020,21]
+It's always been you and me. That voice inside your head. The silent confidant, the stoic therapist, the listening preacher.
+
+[0200,1200,20200,210]
+It's what we did in life. Why stop now?
+
+[0201,1201,20201,211]
+I know you have. It's why you're here now too.
+
+###
+
+[START]
+I guess so...
+
+[START]
+Yes.
+
+[START]
+I need you to. Please.
+
+[2]
+A chance to comfort someone else for a change.
+
+[2:0.3]
+A thought that there might be someone else here besides me.
+
+[0,1,20:-0.2,0,0.2]
+I see you.
+
+[0,1,20]
+I don't see you.
+
+[0,1,20]
+Do you see me?
+
+[00,10,200,01,11,201]
+I'm beginning to understand.
+
+[02,12,202]
+I don't understand.
+
+[020,120,2020,21]
+Then why pretend with all these conversations?
+
+[020,120,2020,21]
+I've been there for you too.
