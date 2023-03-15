@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.54243875, g: 0.41137582, b: 0.20929033, a: 1}
+  m_IndirectSpecularColor: {r: 0.5496433, g: 0.4372395, b: 0.20984276, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -162,7 +162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 49870965524103968, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 49870965524103968, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
       propertyPath: m_AnchorMax.x
@@ -309,7 +309,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &158111106593252887
 PrefabInstance:
@@ -367,12 +367,16 @@ PrefabInstance:
       value: Game Managers
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: nextScene
+      value: Tundra
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: colourOrder.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: repeatableOrder.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: colourOrder.Array.data[0].a
@@ -423,8 +427,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: colourOrder.Array.data[3].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: colourOrder.Array.data[3].b
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: colourOrder.Array.data[3].g
+      value: 0.5522876
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: colourOrder.Array.data[3].r
+      value: 0.7647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: conversationOrder.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: repeatableOrder.Array.data[2]
@@ -442,6 +462,10 @@ PrefabInstance:
       propertyPath: conversationOrder.Array.data[2]
       value: 
       objectReference: {fileID: 4900000, guid: b6e3b089a859e5947bb5e5b85766faff, type: 3}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: conversationOrder.Array.data[3]
+      value: 
+      objectReference: {fileID: 4900000, guid: c29970a1f8c72ef478bd7c574014125a, type: 3}
     - target: {fileID: 4067558126636063852, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: m_TargetCamera
       value: 
@@ -467,17 +491,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1101706409552399828, guid: f902d44c947610b4497f7ff7224fa26e, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fed17b7c8cc02284288fee454b378aa7, type: 3}
     - target: {fileID: 3399137259349040560, guid: f902d44c947610b4497f7ff7224fa26e, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 733bdb4d0a1439246a149a75ad8b4f19, type: 3}
     - target: {fileID: 3399137259349040561, guid: f902d44c947610b4497f7ff7224fa26e, type: 3}
       propertyPath: m_Name
-      value: Ambient
+      value: Sounds
       objectReference: {fileID: 0}
     - target: {fileID: 3399137259349040563, guid: f902d44c947610b4497f7ff7224fa26e, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3399137259349040563, guid: f902d44c947610b4497f7ff7224fa26e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -519,6 +547,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8768162886782401766, guid: f902d44c947610b4497f7ff7224fa26e, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 733bdb4d0a1439246a149a75ad8b4f19, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f902d44c947610b4497f7ff7224fa26e, type: 3}
 --- !u!1001 &4741910204307373191
@@ -542,7 +574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4741910205982549712, guid: 43b62d34d7c7f4dfb95228fe977ec85e, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4741910205982549712, guid: 43b62d34d7c7f4dfb95228fe977ec85e, type: 3}
       propertyPath: m_LocalPosition.x

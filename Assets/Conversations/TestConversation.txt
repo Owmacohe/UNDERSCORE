@@ -1,6 +1,9 @@
 [START]
 This is a test. This is some more text. Oh wow!
 
+[0,1]
+Loong goodbye! This is such a long fucking goodbye. Bye bye bye!
+
 ###
 
 [START:1]

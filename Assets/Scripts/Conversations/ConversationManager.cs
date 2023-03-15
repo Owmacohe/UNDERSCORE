@@ -10,6 +10,7 @@ public class ConversationManager : MonoBehaviour
     [SerializeField] TextAsset[] conversationOrder;
     [SerializeField] Color[] colourOrder;
     [SerializeField] bool[] repeatableOrder;
+    [SerializeField] string nextScene;
 
     GameObject bubbles;
     [HideInInspector] public Vector3 bubblePosition;
@@ -126,7 +127,10 @@ public class ConversationManager : MonoBehaviour
             {
                 controller.info = new NPCController.NPCInformation(
                     new Conversation(conversationOrder[currentConversation], colourOrder[currentConversation]),
-                    repeatableOrder[currentConversation]
+                    repeatableOrder[currentConversation],
+                    false,
+                    currentConversation == conversationOrder.Length - 1,
+                    nextScene
                 );
             }
 
@@ -183,7 +187,15 @@ public class ConversationManager : MonoBehaviour
     void WaitEndConversation(Node check)
     {
         if (check.responses == null || check.responses.Count == 0)
+        {
             Invoke(nameof(EndConversation), check.statement.Length * 0.1f);
+
+            if (info.switchSceneOnEnd)
+            {
+                player.isFading = true;
+                player.fadeIn = false;   
+            }
+        }
     }
 
     void EndConversation()

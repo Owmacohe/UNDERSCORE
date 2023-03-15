@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class TerrainManager : MonoBehaviour
 {
-    [Header("FLoor")]
+    [Header("Floor")]
     [SerializeField] GameObject terrain;
     [SerializeField] Material material;
     [SerializeField] float terrainSize = 5;
     [SerializeField] Vector2 generateSize = new Vector2(5, 5);
+    [SerializeField] Material secondaryLayer;
 
     [Header("Points Of Interest")]
     [SerializeField] bool generatePointsOfInterest;
@@ -84,6 +85,16 @@ public class TerrainManager : MonoBehaviour
 
             lastSpawnedTerrain = temp;
             if (temp.lastExtraNpcTransform != null) lastExtraNpcTransform = temp.lastExtraNpcTransform;
+
+            if (secondaryLayer != null)
+            {
+                Instantiate(
+                    terrain,
+                    new Vector3(x * terrainSize * 10, -3, y * terrainSize * 10),
+                    Quaternion.identity,
+                    transform)
+                    .GetComponentInChildren<MeshRenderer>().material = secondaryLayer;
+            }
         }
     }
     

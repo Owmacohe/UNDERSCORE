@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float clickRadius = 2;
     [SerializeField] ConversationManager convoManager;
     [SerializeField] TerrainManager terrManager;
+    
+    [Header("Fading")]
+    [SerializeField] Image fade;
+    [SerializeField] float fadeSpeed = 0.01f;
 
     Animator anim;
     Rigidbody rb;
@@ -20,10 +25,15 @@ public class PlayerController : MonoBehaviour
 
     GameObject[] allNPCs;
 
+    [HideInInspector] public bool isFading, fadeIn;
     [HideInInspector] public bool pauseMovement;
 
     void Start()
     {
+        fade.enabled = true;
+        isFading = true;
+        fadeIn = true;
+
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         main = Camera.main;
@@ -138,6 +148,13 @@ public class PlayerController : MonoBehaviour
         }
 
         if (pauseMovement && moving) ResetMovement(false);
+
+        if (isFading)
+        {
+            fade.color = new Color(0, 0, 0, fade.color.a + (fadeIn ? -fadeSpeed : 0.1f * fadeSpeed)); // TODO: better fade speed
+
+            if ((fadeIn && fade.color.a <= 0.01) || (!fadeIn && fade.color.a >= 0.99)) isFading = false;
+        }
     }
 
     void ResetMovement(bool startConvo, NPCController controller = null)

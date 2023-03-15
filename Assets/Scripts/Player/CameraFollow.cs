@@ -30,6 +30,6 @@ public class CameraFollow : MonoBehaviour
             Random.Range(-shakeAmount, shakeAmount), 
             0);
         
-        Invoke(nameof(ChangeShakeOffset), 0.75f);
+        Invoke(nameof(ChangeShakeOffset), 1);
     }
 }

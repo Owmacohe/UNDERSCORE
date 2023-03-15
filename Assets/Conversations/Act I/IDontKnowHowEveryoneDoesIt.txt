@@ -46,7 +46,13 @@ A chance to comfort someone else for a change.
 [2:0.3]
 A thought that there might be someone else here besides me.
 
-[0,1,20:-0.2,0,0.2]
+[0:-0.2]
+I see you.
+
+[1]
+I see you.
+
+[20:0.2]
 I see you.
 
 [0,1,20]

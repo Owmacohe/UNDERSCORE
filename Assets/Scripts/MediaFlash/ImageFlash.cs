@@ -5,9 +5,9 @@ using Random = UnityEngine.Random;
 
 public class ImageFlash : MonoBehaviour
 {
-    [SerializeField] Sprite[] images;
     [Range(0, 1)] public float flashChance = 0.001f;
 
+    Sprite[] images;
     Image img;
     
     bool isShowing;
@@ -17,6 +17,9 @@ public class ImageFlash : MonoBehaviour
 
     void Start()
     {
+        images = Resources.LoadAll<Sprite>("");
+        print(images.Length);
+        
         img = GetComponentInChildren<Image>();
         imgTransform = img.GetComponent<RectTransform>();
 
