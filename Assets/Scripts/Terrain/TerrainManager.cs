@@ -8,13 +8,14 @@ public class TerrainManager : MonoBehaviour
     [SerializeField] GameObject terrain;
     [SerializeField] Material material;
     [SerializeField] float terrainSize = 5;
-    [SerializeField] Vector2 generateSize = new Vector2(5, 5);
+    [SerializeField] Vector2 generateSize = new Vector2(8, 8);
     [SerializeField] Material secondaryLayer;
 
     [Header("Points Of Interest")]
     [SerializeField] bool generatePointsOfInterest;
     [SerializeField] float bufferDistance = 3;
     [SerializeField] PathChecker checker;
+    [SerializeField] bool generateSnow;
 
     List<Vector2> coordinates;
     List<Vector2> hasBeenGeneratedAround;
@@ -80,7 +81,7 @@ public class TerrainManager : MonoBehaviour
             temp.pointsOfInterest = new List<GameObject>(pointsOfInterest);
             temp.bufferDistance = bufferDistance;
 
-            temp.Generate(generatePointsOfInterest, generateExtraNPC, extraNPCInfo);
+            temp.Generate(generatePointsOfInterest, generateExtraNPC, extraNPCInfo, generateSnow);
             generateExtraNPC = false;
 
             lastSpawnedTerrain = temp;

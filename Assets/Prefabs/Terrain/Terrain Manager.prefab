@@ -46,7 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 260755149568207417, guid: b654191fa969843c293487ec8ab76390, type: 3}
-  generateSize: {x: 5, y: 5}
+  material: {fileID: 0}
+  terrainSize: 5
+  generateSize: {x: 8, y: 8}
+  secondaryLayer: {fileID: 0}
+  generatePointsOfInterest: 0
+  bufferDistance: 3
+  checker: {fileID: 0}
+  currentTerrain: {x: 0, y: 0}
+  generateExtraNPC: 0
+  lastExtraNpcTransform: {fileID: 0}
 --- !u!1001 &8432014814529254526
 PrefabInstance:
   m_ObjectHideFlags: 0

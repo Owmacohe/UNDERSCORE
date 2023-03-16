@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
         ResetMovement(false);
 
         allNPCs = GameObject.FindGameObjectsWithTag("NPC");
+
+        pauseMovement = true;
     }
 
     void Update()

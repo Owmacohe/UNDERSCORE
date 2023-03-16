@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 public class ImageFlash : MonoBehaviour
 {
     [Range(0, 1)] public float flashChance = 0.001f;
+    [SerializeField] Vector2 maxShowingTimes = new Vector2(1, 3);
+    [SerializeField] float rotateInterval = 1;
 
     Sprite[] images;
     Image img;
@@ -18,7 +20,6 @@ public class ImageFlash : MonoBehaviour
     void Start()
     {
         images = Resources.LoadAll<Sprite>("");
-        print(images.Length);
         
         img = GetComponentInChildren<Image>();
         imgTransform = img.GetComponent<RectTransform>();
@@ -34,7 +35,7 @@ public class ImageFlash : MonoBehaviour
         }
         else if (isShowing)
         {
-            if (Time.time % 1f == 0)
+            if (Time.time % rotateInterval == 0)
             {
                 imgTransform.anchoredPosition = new Vector3(
                     Random.Range(-100f, 100f),
@@ -64,6 +65,6 @@ public class ImageFlash : MonoBehaviour
 
         isShowing = true;
         startShowingTime = Time.time;
-        maxShowingTime = Random.Range(1f, 3f);
+        maxShowingTime = Random.Range(maxShowingTimes.x, maxShowingTimes.y);
     }
 }

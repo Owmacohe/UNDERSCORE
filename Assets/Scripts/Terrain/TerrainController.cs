@@ -7,6 +7,7 @@ public class TerrainController : MonoBehaviour
 {
     [SerializeField] GameObject sign, NPC;
     [SerializeField] Vector2 signNumRange = new Vector2(60, 60);
+    [SerializeField] GameObject snow;
 
     [HideInInspector] public List<GameObject> pointsOfInterest;
     [HideInInspector] public float bufferDistance;
@@ -15,7 +16,7 @@ public class TerrainController : MonoBehaviour
     
     Transform terrainTransform, playerTransform;
 
-    public void Generate(bool generatePointsOfInterest, bool extraNPC, NPCController.NPCInformation extraInfo)
+    public void Generate(bool generatePointsOfInterest, bool extraNPC, NPCController.NPCInformation extraInfo, bool generateSnow = false)
     {
         terrainTransform = transform.GetChild(0).transform;
         float half = (terrainTransform.localScale.x / 2) * 10;
@@ -67,6 +68,11 @@ public class TerrainController : MonoBehaviour
                 NPCController controller = temp.GetComponentInChildren<NPCController>();
                 controller.info = extraInfo;
             }
+        }
+
+        if (generateSnow)
+        {
+            Instantiate(snow, transform);
         }
     }
 

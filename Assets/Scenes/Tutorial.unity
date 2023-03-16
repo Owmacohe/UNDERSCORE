@@ -449,6 +449,10 @@ PrefabInstance:
       propertyPath: waitBeforeShowing
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4338265411788615415, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4701606137990168954, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
       propertyPath: m_text
       value: 'Chapter 0:'

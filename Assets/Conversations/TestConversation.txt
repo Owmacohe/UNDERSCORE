@@ -6,8 +6,8 @@ Loong goodbye! This is such a long fucking goodbye. Bye bye bye!
 
 ###
 
-[START:1]
+[START:10]
 Hello.
 
-[START:-1]
+[START:-10]
 Goodbye!
