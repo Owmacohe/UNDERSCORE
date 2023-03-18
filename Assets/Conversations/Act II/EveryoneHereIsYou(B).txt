@@ -1,0 +1,43 @@
+[START]
+Do you understand yet?
+
+[0]
+Well, yes. That's true.
+But you're not ready yet.
+<br>
+Keep moving.
+
+[1]
+Yes. Yes, yes, yes, yes, yes.
+Me, you, the eyes through the screen.
+Fundamentally, I can see you.
+
+[2]
+Not rewarded, seen. You're getting close.
+<br>
+Keep moving.
+
+[10]
+Good. I'm so glad.
+
+[11]
+You're not ready for that yet.
+<br>
+Keep moving.
+
+###
+
+[START:-0.2]
+I'm dead.
+
+[START:0.2:1]
+Everyone here is me.
+
+[START:0:0.5]
+I'm being rewarded.
+
+[1]
+I feel validated.
+
+[1]
+What does it mean?

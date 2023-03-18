@@ -6,10 +6,8 @@ using UnityEngine.SceneManagement;
 public class ConversationManager : MonoBehaviour
 {
     [SerializeField] GameObject speechBubble;
-    [SerializeField] bool ignoreOrder;
     [SerializeField] TextAsset[] conversationOrder;
     [SerializeField] Color[] colourOrder;
-    [SerializeField] bool[] repeatableOrder;
     [SerializeField] string nextScene;
 
     GameObject bubbles;
@@ -20,6 +18,7 @@ public class ConversationManager : MonoBehaviour
     NPCController.NPCInformation info;
 
     PlayerController player;
+    AwarenessManager manager;
     
     public class Node
     {
@@ -43,7 +42,7 @@ public class ConversationManager : MonoBehaviour
         public string current;
         public List<Node> nodes;
 
-        public Conversation(TextAsset txt, Color col)
+        public Conversation(TextAsset txt, Color col, float awarenessAtCreation)
         {
             colour = col;
             current = "START";
@@ -64,10 +63,10 @@ public class ConversationManager : MonoBehaviour
                     }
                     else
                     {
-                        string[] namesAndAwareness = line
+                        string[] namesAwarenessRestriction = line
                             .Substring(1, lines[i].Trim().Length - 2)
                             .Split(':');
-                        string[] names = namesAndAwareness[0].Split(',');
+                        string[] names = namesAwarenessRestriction[0].Split(',');
                         
                         string temp = "";
 
@@ -90,10 +89,15 @@ public class ConversationManager : MonoBehaviour
                                     Debug.Log("No node with name: \"" + name + "\" found!");
                                 else
                                 {
-                                    tempNode.responses.Add(temp);
+                                    if ((namesAwarenessRestriction.Length == 3 &&
+                                         awarenessAtCreation >= float.Parse(namesAwarenessRestriction[2])) ||
+                                        namesAwarenessRestriction.Length < 3)
+                                    {
+                                        tempNode.responses.Add(temp);
                                     
-                                    tempNode.awarenessChange.Add(
-                                        namesAndAwareness.Length == 2 ? float.Parse(namesAndAwareness[1]) : 0);
+                                        tempNode.awarenessChange.Add(
+                                            namesAwarenessRestriction.Length >= 2 ? float.Parse(namesAwarenessRestriction[1]) : 0);   
+                                    }
                                 }
                             }
                         }
@@ -115,23 +119,26 @@ public class ConversationManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        manager = GameObject.FindWithTag("Player").GetComponent<AwarenessManager>();
     }
 
     public void NewConversation(NPCController controller)
     {
         if (!isInConversation &&
-            (controller.info == null && currentConversation < conversationOrder.Length) ||
-            (controller.info != null && (controller.info.repeatable || controller.info.ignoreOrder)))
+            ((controller.info == null && (currentConversation < conversationOrder.Length || controller.info.ignoreOrder)) ||
+             (controller.info != null && controller.info.ignoreOrder)))
         {
-            if (controller.info == null || (!controller.info.repeatable && !controller.info.ignoreOrder))
+            if (controller.info == null)
             {
                 controller.info = new NPCController.NPCInformation(
-                    new Conversation(conversationOrder[currentConversation], colourOrder[currentConversation]),
-                    repeatableOrder[currentConversation],
+                    new Conversation(
+                        conversationOrder[currentConversation],
+                        colourOrder[currentConversation],
+                        manager.awareness),
                     false,
                     currentConversation == conversationOrder.Length - 1,
                     nextScene
-                );
+                );   
             }
 
             info = controller.info;
@@ -154,8 +161,6 @@ public class ConversationManager : MonoBehaviour
 
     public void MakeChoice(int choice)
     {
-        AwarenessManager manager = GameObject.FindWithTag("Player").GetComponent<AwarenessManager>();
-        
         if (!info.completed)
             manager.UpdateAwareness(info.conversation.FindNode(info.conversation.current).awarenessChange[choice]);
 
@@ -188,22 +193,19 @@ public class ConversationManager : MonoBehaviour
     {
         if (check.responses == null || check.responses.Count == 0)
         {
-            Invoke(nameof(EndConversation), check.statement.Length * 0.1f);
-
-            if (info.switchSceneOnEnd)
-            {
-                player.isFading = true;
-                player.fadeIn = false;   
-            }
+            Invoke(nameof(EndConversation), check.statement.Length * 0.08f);
+            
+            player.pauseMovement = false;
+            
+            if (info.switchSceneOnEnd) player.FadeOut(-(1231f/9640f) * check.statement.Length + (11224f/241f));
         }
     }
 
     void EndConversation()
     {
-        if (bubbles != null) Destroy(bubbles);
+        //if (bubbles != null) Destroy(bubbles);
 
         isInConversation = false;
-        player.pauseMovement = false;
 
         info.completed = true;
         

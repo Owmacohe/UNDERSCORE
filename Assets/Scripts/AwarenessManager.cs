@@ -17,7 +17,7 @@ public class AwarenessManager : MonoBehaviour
      * text distortion in TitleSmash or ConversationManager?
     */
     
-    float awareness;
+    [HideInInspector] public float awareness;
 
     bool upPlayerLightAngle;
     float playerLightAngle;

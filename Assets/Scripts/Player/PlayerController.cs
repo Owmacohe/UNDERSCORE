@@ -9,10 +9,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float clickRadius = 2;
     [SerializeField] ConversationManager convoManager;
     [SerializeField] TerrainManager terrManager;
-    
-    [Header("Fading")]
     [SerializeField] Image fade;
-    [SerializeField] float fadeSpeed = 0.01f;
+
+    float fadeSpeed;
 
     Animator anim;
     Rigidbody rb;
@@ -41,8 +40,6 @@ public class PlayerController : MonoBehaviour
         ResetMovement(false);
 
         allNPCs = GameObject.FindGameObjectsWithTag("NPC");
-
-        pauseMovement = true;
     }
 
     void Update()
@@ -153,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
         if (isFading)
         {
-            fade.color = new Color(0, 0, 0, fade.color.a + (fadeIn ? -fadeSpeed : 0.1f * fadeSpeed)); // TODO: better fade speed
+            fade.color = new Color(0, 0, 0, fade.color.a + (fadeIn ? -0.01f : 0.0001f * fadeSpeed)); // TODO: better fade speed
 
             if ((fadeIn && fade.color.a <= 0.01) || (!fadeIn && fade.color.a >= 0.99)) isFading = false;
         }
@@ -167,6 +164,13 @@ public class PlayerController : MonoBehaviour
         speedBoost = 1;
 
         if (startConvo) convoManager.NewConversation(controller);
+    }
+
+    public void FadeOut(float fadingSpeed)
+    {
+        isFading = true;
+        fadeIn = false;
+        fadeSpeed = fadingSpeed;
     }
 
     void OnCollisionEnter(Collision collision)

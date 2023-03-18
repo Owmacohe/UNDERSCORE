@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2867341115199705027}
   - component: {fileID: 1026358106550814312}
   - component: {fileID: 4475630106319226318}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6392495146273361327}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

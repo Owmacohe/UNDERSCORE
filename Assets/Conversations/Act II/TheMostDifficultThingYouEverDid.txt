@@ -1,0 +1,68 @@
+[START]
+Try to think of the most difficult thing you've ever done.
+<br>
+What was it?
+
+[0,1]
+Why was it so hard?
+
+[2]
+Why did you do that? What did it give you?
+
+[01,10]
+To who?
+
+[20]
+You're beginning to understand. Fundamentally, everyone feels the same way. The recognition of that fact is how love works.
+
+[21]
+Keep going.
+<br>
+And ask yourself this: why does everyone here look the same?
+
+[00,11,010,100,011,101,012,102,013,103]
+I know it felt that way. I know it hurt. But I saw the effort. All of us here did.
+
+[000,110,0100,1000,0110,1010,0120,1020,0130,1030]
+I'm you.
+
+###
+
+[START]
+I existed.
+
+[START]
+I designed something.
+
+[START]
+I helped someone else.
+
+[0]
+I couldn't achieve anything.
+
+[0,1]
+I had to keep proving myself.
+
+[1]
+All of the unseen labour.
+
+[2:0.5:1]
+They're a mirror of me.
+
+[2:-0.2]
+I don't know.
+
+[01,10]
+To you.
+
+[01,10]
+To everyone else.
+
+[01,10]
+To myself.
+
+[01,10]
+To the system.
+
+[00,11,010,100,011,101,012,102,013,103:0.2]
+Are you a hallucination? A fleeting thought as my brain decomposes?

@@ -12,7 +12,7 @@ public class Tutorial : MonoBehaviour
 
     void Start()
     {
-        float initialWaitTime = 22; // 22
+        float initialWaitTime = 22;
         
         tips.ShowTip("Hey you", Vector3.forward * 10, 5, initialWaitTime);
         tips.ShowTip("Can you hear me?", Vector3.forward * 15 + Vector3.right * 20, 5, initialWaitTime + 2);
@@ -32,8 +32,7 @@ public class Tutorial : MonoBehaviour
                 
                 terrains.generateExtraNPC = true;
                 terrains.extraNPCInfo = new NPCController.NPCInformation(
-                    new ConversationManager.Conversation(conversation, colour),
-                    false,
+                    new ConversationManager.Conversation(conversation, colour, 0),
                     true,
                     true,
                     "SignForest"

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 260755149568207421}
   - component: {fileID: 5922704241538824824}
   m_Layer: 0
-  m_Name: Terrain
+  m_Name: Terrain (Tundra)
   m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sign: {fileID: 7726674457192210829, guid: ea5b6b5849b504b1fad16dc30ed3dd95, type: 3}
   NPC: {fileID: 5386856975671081882, guid: 18dffbfa6c2df4fb7a5f381feaea552a, type: 3}
-  signNumRange: {x: 60, y: 60}
+  signNumRange: {x: 0, y: 0}
   snow: {fileID: 3845141331095963056, guid: cdd1f0e7ab897464199b25bab4d4b276, type: 3}
   pointsOfInterest: []
   bufferDistance: 0

@@ -9,5 +9,5 @@ Loong goodbye! This is such a long fucking goodbye. Bye bye bye!
 [START:10]
 Hello.
 
-[START:-10]
+[START:-10:1]
 Goodbye!

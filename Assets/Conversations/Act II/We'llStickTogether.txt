@@ -1,0 +1,77 @@
+[START,2,20]
+...
+
+[0]
+Am I dead?
+
+[00]
+Yes.
+
+[000]
+What's inside?
+
+[200]
+Bye.
+
+
+[0000]
+Right.
+
+[1,01,001,0001]
+Oh, sorry. Got a little confused there. What were we talking about?
+
+[10,010,0010,00010]
+I can't get it out of my head either.
+
+[11,011,0011,00011]
+Okay.
+
+[12,012,0012,00012]
+Only if you're me.
+
+[100,0100,00100,000100,101,0101,00101,000101]
+Only in dreams.
+
+###
+
+[START]
+Sooner or later it had to happen.
+Heart attack, big fall, car crash.
+
+[START,0,00,000:-0.3]
+Wait, what?
+
+[START,2]
+...
+
+[0]
+It sucks, it really does. I'm sorry for you.
+<br>
+Do you still feel the pull?
+
+[00]
+I expected as much. Enjoy purgatory.
+Want to take a peek inside?
+
+[20]
+Bye I guess.
+
+[000:0.2]
+It's complicated. A bit of you, a bit of me.
+But it's okay, we'll stick together.
+Right?
+
+[1,01,001,0001]
+Huh. Déja vu.
+
+[1,01,001,0001]
+Nevermind.
+
+[1,01,001,0001:0:1]
+Are you me?
+
+[10,010,0010,00010]
+Have we been to this place before?
+
+[10,010,0010,00010:0.2]
+Do you think this is what we've been looking for all along?
