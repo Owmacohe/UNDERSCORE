@@ -7,15 +7,22 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 10;
     [SerializeField] float clickRadius = 2;
-    [SerializeField] ConversationManager convoManager;
-    [SerializeField] TerrainManager terrManager;
     [SerializeField] Image fade;
+
+    [Header("Awakened")]
+    [SerializeField] MeshRenderer rightEye;
+    [SerializeField] MeshRenderer leftEye;
+    [SerializeField] Material defaultEyesMaterial, awakenedEyesMaterial;
+    [SerializeField] GameObject rightSpotlight, leftSpotlight;
 
     float fadeSpeed;
 
     Animator anim;
     Rigidbody rb;
     Camera main;
+    
+    ConversationManager convoManager;
+    TerrainManager terrManager;
 
     Vector3 target, direction;
     bool moving, clickedNPC, pointerOverUI;
@@ -55,14 +62,14 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out var hit))
             {
-                if ((hit.transform.parent != null && hit.transform.parent.gameObject.CompareTag("Terrain")) ||
-                    hit.transform.gameObject.CompareTag("NPC") ||
+                if ((hit.transform.parent != null &&
+                     (hit.transform.parent.gameObject.CompareTag("Terrain") || hit.transform.parent.gameObject.CompareTag("NPC"))) ||
                     hit.transform.gameObject.CompareTag("Player"))
                 {
                     if (Vector3.Distance(transform.position, hit.point) > clickRadius &&
                         !hit.transform.gameObject.Equals(gameObject))
                     {
-                        clickedNPC = hit.transform.gameObject.CompareTag("NPC");
+                        if (hit.transform.parent != null) clickedNPC = hit.transform.parent.gameObject.CompareTag("NPC");
 
                         if (clickedNPC) convoManager.bubblePosition = hit.transform.position;
                         else
@@ -80,7 +87,7 @@ public class PlayerController : MonoBehaviour
                         
                         if (clickedNPC)
                         {
-                            targetController = hit.transform.GetComponent<NPCController>();
+                            targetController = hit.transform.parent.GetComponent<NPCController>();
                             
                             if (Vector3.Distance(transform.position, hit.transform.position) <= clickRadius)
                             {
@@ -173,17 +180,32 @@ public class PlayerController : MonoBehaviour
         fadeSpeed = fadingSpeed;
     }
 
+    public void SwitchToAwakened()
+    {
+        rightEye.material = awakenedEyesMaterial;
+        leftEye.material = awakenedEyesMaterial;
+
+        rightSpotlight.SetActive(true);
+        leftSpotlight.SetActive(true);
+    }
+
+    public void UpdateAfterSceneSwitch()
+    {
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.Euler(Vector3.up * 180);
+        
+        convoManager = FindObjectOfType<ConversationManager>();
+        terrManager = FindObjectOfType<TerrainManager>();
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("NPC") &&
-            collision.transform.parent != null &&
-            collision.transform.parent.gameObject.CompareTag("Terrain"))
+        if (collision.transform.parent != null && collision.transform.parent.gameObject.CompareTag("Terrain"))
             terrManager.GenerateAround(collision.transform.position);
-        else ResetMovement(
-            clickedNPC &&
-            collision.gameObject.CompareTag("NPC") &&
-            targetController.gameObject.Equals(collision.gameObject),
-            targetController
-        );
+        else if (collision.transform.parent != null && collision.transform.parent.gameObject.CompareTag("NPC"))
+        {
+            convoManager.bubblePosition = collision.transform.position;
+            ResetMovement(true, collision.transform.parent.GetComponent<NPCController>());
+        }
     }
 }

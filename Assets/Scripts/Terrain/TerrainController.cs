@@ -16,7 +16,7 @@ public class TerrainController : MonoBehaviour
     
     Transform terrainTransform, playerTransform;
 
-    public void Generate(bool generatePointsOfInterest, bool extraNPC, NPCController.NPCInformation extraInfo, bool generateSnow = false)
+    public void Generate(bool generatePointsOfInterest, float bufferFromCentre, bool NPCFollow, bool extraNPC, NPCController.NPCInformation extraInfo, bool generateSnow = false)
     {
         terrainTransform = transform.GetChild(0).transform;
         float half = (terrainTransform.localScale.x / 2) * 10;
@@ -25,16 +25,18 @@ public class TerrainController : MonoBehaviour
 
         if (generatePointsOfInterest)
         {
-            spawnedNPC = Instantiate(
-                NPC,
-                new Vector3(
-                    transform.position.x + Random.Range(-half, half),
-                    0,
-                    transform.position.z + Random.Range(-half, half)),
-                Quaternion.Euler(0, 180, 0),
-                transform);
-        
-            pointsOfInterest.Add(spawnedNPC);
+            Vector3 NPCpos = new Vector3(
+                transform.position.x + Random.Range(-half, half),
+                0,
+                transform.position.z + Random.Range(-half, half));
+
+            if (Vector3.Distance(NPCpos, Vector3.zero) > bufferFromCentre)
+            {
+                spawnedNPC = Instantiate(NPC, NPCpos, Quaternion.Euler(0, 180, 0), transform);
+                spawnedNPC.GetComponent<NPCController>().followPlayer = NPCFollow;
+                
+                pointsOfInterest.Add(spawnedNPC);
+            }
 
             for (int i = 0; i < Random.Range(signNumRange.x, signNumRange.y); i++)
             {
@@ -42,8 +44,9 @@ public class TerrainController : MonoBehaviour
                 Vector3 pos = temp.transform.position;
 
                 if (temp != null &&
-                    (Vector3.Distance(spawnedNPC.transform.position, pos) <= 5 ||
-                    Vector3.Distance(playerPos, pos) <= 10))
+                    (((spawnedNPC != null && Vector3.Distance(spawnedNPC.transform.position, pos) <= 5) ||
+                    Vector3.Distance(playerPos, pos) <= 10) ||
+                    Vector3.Distance(pos, Vector3.zero) <= bufferFromCentre))
                     Destroy(temp);
             }
         }
@@ -67,6 +70,7 @@ public class TerrainController : MonoBehaviour
             {
                 NPCController controller = temp.GetComponentInChildren<NPCController>();
                 controller.info = extraInfo;
+                controller.followPlayer = NPCFollow;
             }
         }
 

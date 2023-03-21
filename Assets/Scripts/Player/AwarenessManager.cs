@@ -31,9 +31,9 @@ public class AwarenessManager : MonoBehaviour
         playerCameraFOV = playerCamera.fieldOfView;
     }
 
-    public void UpdateAwareness(float a)
+    public void UpdateAwareness(float amount)
     {
-        awareness += a;
+        awareness += amount;
 
         if (awareness < -2) awareness = -2;
         if (awareness > 3) awareness = 3;

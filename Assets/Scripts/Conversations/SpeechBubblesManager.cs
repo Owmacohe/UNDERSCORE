@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class SpeechBubblesManager : MonoBehaviour
 {
-    [SerializeField] bool generateOnStart;
-    
-    [TextArea(1, 100)]
-    [SerializeField] string text;
-    [TextArea(1, 100)]
-    [SerializeField] string[] responses;
     [SerializeField] GameObject speechBubble;
     
     List<SpeechBubble> bubbles = new List<SpeechBubble>();
@@ -19,15 +13,11 @@ public class SpeechBubblesManager : MonoBehaviour
     Vector3 hoverPosition;
     Color bubbleColour;
     string[] responseTexts;
+    Color[] responseColours;
 
     void Start()
     {
         main = Camera.main;
-
-        if (generateOnStart)
-        {
-            Generate(text, responses, Vector3.zero, bubbleColour, true);
-        }
     }
     
     void FixedUpdate()
@@ -35,7 +25,7 @@ public class SpeechBubblesManager : MonoBehaviour
         if (!hoverPosition.Equals(Vector3.zero))
         {
             offset.position = main.WorldToScreenPoint(hoverPosition);
-            responseOffset.position = main.WorldToScreenPoint(player.position + Vector3.up * 7.5f);
+            responseOffset.position = main.WorldToScreenPoint(player.position + Vector3.up * 7);
         }
     }
 
@@ -44,7 +34,7 @@ public class SpeechBubblesManager : MonoBehaviour
         string[] responseText,
         Vector3 bubblePosition,
         Color colour,
-        bool fromStart = false)
+        Color[] respColours)
     {
         player = GameObject.FindWithTag("Player").transform;
         bubbleColour = colour;
@@ -52,12 +42,13 @@ public class SpeechBubblesManager : MonoBehaviour
         offset = transform.GetChild(0);
         responseOffset = transform.GetChild(1);
 
-        if (!fromStart) hoverPosition = bubblePosition + Vector3.up * (7.5f + (0.0015f * bubbleText.Length));
+        hoverPosition = bubblePosition + Vector3.up * (7.5f + (0.0015f * bubbleText.Length));
 
         bubbles.Add(Instantiate(speechBubble, offset).GetComponent<SpeechBubble>());
         bubbles[0].Generate(bubbleText, bubbleColour, false, Vector2.zero);
 
         responseTexts = responseText;
+        responseColours = respColours;
     }
 
     public void GenerateResponses()
@@ -69,7 +60,7 @@ public class SpeechBubblesManager : MonoBehaviour
             bubbles.Add(Instantiate(speechBubble, responseOffset).GetComponent<SpeechBubble>());
             bubbles[i+1].Generate(
                 responseTexts[i],
-                Color.white,
+                responseColours[i],
                 true,
                 Vector2.zero,
                 i,

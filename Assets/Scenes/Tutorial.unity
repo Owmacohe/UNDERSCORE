@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 917401749}
   - component: {fileID: 917401750}
+  - component: {fileID: 917401751}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -171,6 +172,19 @@ MonoBehaviour:
   terrains: {fileID: 1110942397}
   colour: {r: 1, g: 0.7666667, b: 0, a: 1}
   conversation: {fileID: 4900000, guid: 133bcc3e7044f4928862826e59ee2bc4, type: 3}
+--- !u!114 &917401751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917401748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128cb15367004f22b2723fd9dda46c55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  next: SignForest
 --- !u!1001 &1110942396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233,7 +247,7 @@ PrefabInstance:
     - target: {fileID: 4067558126636063852, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: m_TargetCamera
       value: 
-      objectReference: {fileID: 4741910204307373192}
+      objectReference: {fileID: 0}
     - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: material
       value: 
@@ -249,17 +263,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2c7b84e3d3741ae84b1f454e9587dec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1110942398 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
-  m_PrefabInstance: {fileID: 1110942396}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70fe5cf853284688ae68eae83185a716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1390431971 stripped
@@ -441,6 +444,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TitleSmashCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 49870965524103972, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 49870967412993532, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
       propertyPath: text
       value: intro duction
@@ -463,25 +470,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
---- !u!1001 &4741910204307373191
+--- !u!1001 &1987433885
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4741910204952416975, guid: 43b62d34d7c7f4dfb95228fe977ec85e, type: 3}
-      propertyPath: terrManager
-      value: 
-      objectReference: {fileID: 1110942397}
-    - target: {fileID: 4741910204952416975, guid: 43b62d34d7c7f4dfb95228fe977ec85e, type: 3}
-      propertyPath: convoManager
-      value: 
-      objectReference: {fileID: 1110942398}
-    - target: {fileID: 4741910204952416975, guid: 43b62d34d7c7f4dfb95228fe977ec85e, type: 3}
-      propertyPath: convoController
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4741910205982549712, guid: 43b62d34d7c7f4dfb95228fe977ec85e, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -532,8 +527,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43b62d34d7c7f4dfb95228fe977ec85e, type: 3}
---- !u!20 &4741910204307373192 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4741910205835402085, guid: 43b62d34d7c7f4dfb95228fe977ec85e, type: 3}
-  m_PrefabInstance: {fileID: 4741910204307373191}
-  m_PrefabAsset: {fileID: 0}

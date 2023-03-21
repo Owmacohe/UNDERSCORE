@@ -84,6 +84,7 @@ Transform:
   - {fileID: 5728473012868367708}
   - {fileID: 7817885161885724847}
   - {fileID: 4067558126928805545}
+  - {fileID: 5203667012642878967}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -133,6 +134,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathLight: {fileID: 265378268347560623, guid: e44551438b48f4835897f79412f473be, type: 3}
   segmentLength: 1
+--- !u!1 &7352857085398579973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5203667012642878967}
+  - component: {fileID: 6558092797037441937}
+  m_Layer: 0
+  m_Name: Player Updater
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5203667012642878967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352857085398579973}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 158111107762085602}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6558092797037441937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352857085398579973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4eb000796df4e51989365a5a356caf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakenOnStart: 0
 --- !u!1001 &158111106653937459
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -124,5 +124,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechBubble: {fileID: 3699040443254039244, guid: e214b58ddfb7d43c08d3f54ffb44d07e, type: 3}
-  conversationFile: {fileID: 0}
+  conversationOrder: []
+  colourOrder: []
+  nextScene: 
+  awakenedResponseColour: {r: 1, g: 0.7666667, b: 0, a: 1}
+  responseOpacity: 0.45
   bubblePosition: {x: 0, y: 0, z: 0}
+  currentConversation: 0
+  isInConversation: 0

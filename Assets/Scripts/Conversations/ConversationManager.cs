@@ -9,6 +9,8 @@ public class ConversationManager : MonoBehaviour
     [SerializeField] TextAsset[] conversationOrder;
     [SerializeField] Color[] colourOrder;
     [SerializeField] string nextScene;
+    [SerializeField] Color awakenedResponseColour;
+    [SerializeField] float responseOpacity = 0.4f;
 
     GameObject bubbles;
     [HideInInspector] public Vector3 bubblePosition;
@@ -143,12 +145,20 @@ public class ConversationManager : MonoBehaviour
 
             info = controller.info;
 
+            Color[] responseColours = new Color[info.conversation.nodes[0].responses.Count];
+
+            for (int i = 0; i < responseColours.Length; i++)
+                responseColours[i] = info.conversation.nodes[0].awarenessChange[i] > 0
+                    ? new Color(awakenedResponseColour.r, awakenedResponseColour.g, awakenedResponseColour.b, responseOpacity)
+                    : new Color(1, 1, 1, responseOpacity);
+
             bubbles = Instantiate(speechBubble, transform);
             bubbles.GetComponent<SpeechBubblesManager>().Generate(
                 info.conversation.nodes[0].statement,
                 info.conversation.nodes[0].responses.ToArray(),
                 bubblePosition,
-                info.conversation.colour);
+                info.conversation.colour,
+                responseColours);
             
             isInConversation = true;
             player.pauseMovement = true;
@@ -169,6 +179,13 @@ public class ConversationManager : MonoBehaviour
         Destroy(bubbles);
 
         Node temp = info.conversation.FindNode(info.conversation.current + choice);
+        
+        Color[] responseColours = new Color[temp.responses.Count];
+
+        for (int i = 0; i < responseColours.Length; i++)
+            responseColours[i] = temp.awarenessChange[i] > 0
+                ? new Color(awakenedResponseColour.r, awakenedResponseColour.g, awakenedResponseColour.b, responseOpacity)
+                : new Color(1, 1, 1, responseOpacity);
 
         if (temp != null)
         {
@@ -177,7 +194,8 @@ public class ConversationManager : MonoBehaviour
                 temp.statement,
                 temp.responses.ToArray(),
                 bubblePosition,
-                info.conversation.colour);
+                info.conversation.colour,
+                responseColours);
 
             info.conversation.current += choice;
             

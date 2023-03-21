@@ -18,15 +18,26 @@ public class NPCController : MonoBehaviour
             targetScene = target;
         }
     }
+    
+    [SerializeField] float followSpeed = 4;
 
+    [HideInInspector] public bool followPlayer;
     [HideInInspector] public NPCInformation info;
     [HideInInspector] public bool hasInteracted;
     Light l;
+
+    Transform playerTransform;
+    ConversationManager convoManager;
+    Animator anim;
 
     void Start()
     {
         l = GetComponentInChildren<Light>();
         l.intensity = 0;
+
+        playerTransform = GameObject.FindWithTag("Player").transform;
+        convoManager = FindObjectOfType<ConversationManager>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void FixedUpdate()
@@ -40,6 +51,31 @@ public class NPCController : MonoBehaviour
                 
             GetComponentInChildren<SkinnedMeshRenderer>().material.color =
                 info.conversation.colour.Equals(Color.white) ? info.conversation.colour : Color.HSVToRGB(h, l.intensity / 10f, 1);
+        }
+
+        if (followPlayer && !convoManager.isInConversation && (info == null || !info.completed))
+        {
+            Vector3 pos = transform.position;
+            Vector3 playerPos = playerTransform.position;
+            float distance = Vector3.Distance(pos, playerPos);
+            
+            if (distance is <= 30 and >= 5)
+            {
+                if (!anim.GetBool("isWalking")) anim.SetBool("isWalking", true);
+
+                Vector3 dir = (playerPos - pos).normalized;
+                transform.position += dir * (followSpeed * 0.01f);
+                
+                transform.LookAt(playerTransform);
+            }
+            else
+            {
+                if (anim.GetBool("isWalking")) anim.SetBool("isWalking", false);
+            }
+        }
+        else
+        {
+            if (anim.GetBool("isWalking")) anim.SetBool("isWalking", false);
         }
     }
 }
