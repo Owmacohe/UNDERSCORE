@@ -12,6 +12,8 @@ public class TerrainManager : MonoBehaviour
     [SerializeField] Material secondaryLayer;
 
     [Header("Points Of Interest")]
+    [SerializeField] GameObject pointOfInterest;
+    [SerializeField] Vector2 pointOfInterestRange = new Vector2(60, 60);
     [SerializeField] bool generatePointsOfInterest;
     [SerializeField] float bufferDistanceFromCentre;
     [SerializeField] float bufferDistance = 3;
@@ -83,7 +85,15 @@ public class TerrainManager : MonoBehaviour
             temp.pointsOfInterest = new List<GameObject>(pointsOfInterest);
             temp.bufferDistance = bufferDistance;
 
-            temp.Generate(generatePointsOfInterest, bufferDistanceFromCentre, NPCFollow, generateExtraNPC, extraNPCInfo, generateSnow);
+            temp.Generate(
+                generatePointsOfInterest,
+                bufferDistanceFromCentre,
+                pointOfInterest,
+                pointOfInterestRange,
+                NPCFollow,
+                generateExtraNPC,
+                extraNPCInfo,
+                generateSnow);
             generateExtraNPC = false;
 
             lastSpawnedTerrain = temp;

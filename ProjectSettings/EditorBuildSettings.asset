@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tundra.unity
     guid: bad6e5c81f3d4ad42a98e16d952a19a7
+  - enabled: 1
+    path: Assets/Scenes/Moon.unity
+    guid: 3a973c2f422a70a4ab03b19d636dd21b
   m_configObjects: {}

@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &284844422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 284844424}
+  - component: {fileID: 284844423}
+  m_Layer: 0
+  m_Name: Tundra
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &284844423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284844422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128cb15367004f22b2723fd9dda46c55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  next: Moon
+--- !u!4 &284844424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284844422}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1532607766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -288,6 +333,10 @@ PrefabInstance:
       value: Game Managers
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: nextScene
+      value: Moon
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: colourOrder.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -379,6 +428,14 @@ PrefabInstance:
       propertyPath: secondaryLayer
       value: 
       objectReference: {fileID: 2100000, guid: 95e674bc982ad1344ae3ddf2a633a86c, type: 2}
+    - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: pointOfInterestRange.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: pointOfInterestRange.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: bufferDistanceFromCentre
       value: 35

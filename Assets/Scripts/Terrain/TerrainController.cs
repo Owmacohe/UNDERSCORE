@@ -5,8 +5,7 @@ using Random = UnityEngine.Random;
 
 public class TerrainController : MonoBehaviour
 {
-    [SerializeField] GameObject sign, NPC;
-    [SerializeField] Vector2 signNumRange = new Vector2(60, 60);
+    [SerializeField] GameObject NPC;
     [SerializeField] GameObject snow;
 
     [HideInInspector] public List<GameObject> pointsOfInterest;
@@ -16,7 +15,15 @@ public class TerrainController : MonoBehaviour
     
     Transform terrainTransform, playerTransform;
 
-    public void Generate(bool generatePointsOfInterest, float bufferFromCentre, bool NPCFollow, bool extraNPC, NPCController.NPCInformation extraInfo, bool generateSnow = false)
+    public void Generate(
+        bool generatePointsOfInterest,
+        float bufferFromCentre,
+        GameObject POI,
+        Vector2 POIRange,
+        bool NPCFollow,
+        bool extraNPC,
+        NPCController.NPCInformation extraInfo,
+        bool generateSnow = false)
     {
         terrainTransform = transform.GetChild(0).transform;
         float half = (terrainTransform.localScale.x / 2) * 10;
@@ -38,9 +45,9 @@ public class TerrainController : MonoBehaviour
                 pointsOfInterest.Add(spawnedNPC);
             }
 
-            for (int i = 0; i < Random.Range(signNumRange.x, signNumRange.y); i++)
+            for (int i = 0; i < Random.Range(POIRange.x, POIRange.y); i++)
             {
-                GameObject temp = GenerateSign(half);
+                GameObject temp = GenerateSign(POI, half);
                 Vector3 pos = temp.transform.position;
 
                 if (temp != null &&
@@ -80,10 +87,10 @@ public class TerrainController : MonoBehaviour
         }
     }
 
-    GameObject GenerateSign(float max)
+    GameObject GenerateSign(GameObject POI, float max)
     {
         GameObject temp = Instantiate(
-            sign, 
+            POI, 
             new Vector3(
                 transform.position.x + Random.Range(-max, max),
                 0,

@@ -308,7 +308,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1704858656}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 128cb15367004f22b2723fd9dda46c55, type: 3}
   m_Name: 
@@ -486,9 +486,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 4182e96116e01af46a80fe52a6406e1e, type: 2}
     - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
-      propertyPath: bufferDistanceFromCentre
-      value: 15
-      objectReference: {fileID: 0}
+      propertyPath: pointOfInterest
+      value: 
+      objectReference: {fileID: 7726674457192210829, guid: ea5b6b5849b504b1fad16dc30ed3dd95, type: 3}
     - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: generatePointsOfInterest
       value: 1

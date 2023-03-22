@@ -51,8 +51,11 @@ MonoBehaviour:
   generateSize: {x: 8, y: 8}
   secondaryLayer: {fileID: 0}
   generatePointsOfInterest: 0
+  bufferDistanceFromCentre: 15
   bufferDistance: 3
   checker: {fileID: 0}
+  generateSnow: 0
+  NPCFollow: 0
   currentTerrain: {x: 0, y: 0}
   generateExtraNPC: 0
   lastExtraNpcTransform: {fileID: 0}
