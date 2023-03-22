@@ -7,6 +7,8 @@ public class SpeechBubblesManager : MonoBehaviour
     [SerializeField] GameObject speechBubble;
     
     List<SpeechBubble> bubbles = new List<SpeechBubble>();
+
+    AwarenessManager awareness;
     
     Camera main;
     Transform offset, responseOffset, player;
@@ -14,10 +16,12 @@ public class SpeechBubblesManager : MonoBehaviour
     Color bubbleColour;
     string[] responseTexts;
     Color[] responseColours;
+    float[] awarenessRequirements;
 
     void Start()
     {
         main = Camera.main;
+        awareness = FindObjectOfType<AwarenessManager>();
     }
     
     void FixedUpdate()
@@ -34,7 +38,8 @@ public class SpeechBubblesManager : MonoBehaviour
         string[] responseText,
         Vector3 bubblePosition,
         Color colour,
-        Color[] respColours)
+        Color[] respColours,
+        float[] restRequirements)
     {
         player = GameObject.FindWithTag("Player").transform;
         bubbleColour = colour;
@@ -49,6 +54,7 @@ public class SpeechBubblesManager : MonoBehaviour
 
         responseTexts = responseText;
         responseColours = respColours;
+        awarenessRequirements = restRequirements;
     }
 
     public void GenerateResponses()
@@ -57,6 +63,19 @@ public class SpeechBubblesManager : MonoBehaviour
 
         for (int i = 0; i < responseTexts.Length; i++)
         {
+            if (awareness.awareness < awarenessRequirements[i])
+            {
+                string temp = "";
+
+                for (int j = 0; j < responseTexts[i].Trim().Length; j++)
+                {
+                    char cha = responseTexts[i].Trim()[j];
+                    temp += cha.Equals(' ') ? ' ' : (cha.Equals('.') ? '.' : '_');
+                }
+
+                responseTexts[i] = temp;
+            }
+            
             bubbles.Add(Instantiate(speechBubble, responseOffset).GetComponent<SpeechBubble>());
             bubbles[i+1].Generate(
                 responseTexts[i],

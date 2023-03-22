@@ -33,9 +33,11 @@ public class AwarenessManager : MonoBehaviour
 
     public void UpdateAwareness(float amount)
     {
+        if (awareness + amount >= 0) FindObjectOfType<AwarenessRaise>().Raise(awareness, awareness + amount);
+        
         awareness += amount;
 
-        if (awareness < -2) awareness = -2;
+        if (awareness < 0) awareness = 0;
         if (awareness > 3) awareness = 3;
 
         Debug.Log("Awareness: " + awareness);

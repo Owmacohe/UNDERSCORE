@@ -37,8 +37,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         fade.enabled = true;
-        isFading = true;
-        fadeIn = true;
 
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -196,6 +194,9 @@ public class PlayerController : MonoBehaviour
         
         convoManager = FindObjectOfType<ConversationManager>();
         terrManager = FindObjectOfType<TerrainManager>();
+        
+        isFading = true;
+        fadeIn = true;
     }
 
     void OnCollisionEnter(Collision collision)

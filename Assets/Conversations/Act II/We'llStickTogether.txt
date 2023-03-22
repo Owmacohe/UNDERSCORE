@@ -13,7 +13,6 @@ What's inside?
 [200]
 Bye.
 
-
 [0000]
 Right.
 
@@ -38,7 +37,7 @@ Only in dreams.
 Sooner or later it had to happen.
 Heart attack, big fall, car crash.
 
-[START,0,00,000:-0.3]
+[START]
 Wait, what?
 
 [START,2]
@@ -60,6 +59,9 @@ Bye I guess.
 It's complicated. A bit of you, a bit of me.
 But it's okay, we'll stick together.
 Right?
+
+[0,00,000:-0.3]
+Wait, what?
 
 [1,01,001,0001]
 Huh. Déja vu.

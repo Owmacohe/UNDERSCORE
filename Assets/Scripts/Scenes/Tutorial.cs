@@ -32,7 +32,7 @@ public class Tutorial : MonoBehaviour
                 
                 terrains.generateExtraNPC = true;
                 terrains.extraNPCInfo = new NPCController.NPCInformation(
-                    new ConversationManager.Conversation(conversation, colour, 0),
+                    new ConversationManager.Conversation(conversation, colour),
                     true,
                     true,
                     "SignForest"

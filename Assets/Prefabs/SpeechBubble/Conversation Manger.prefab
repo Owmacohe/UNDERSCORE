@@ -129,6 +129,7 @@ MonoBehaviour:
   nextScene: 
   awakenedResponseColour: {r: 1, g: 0.7666667, b: 0, a: 1}
   responseOpacity: 0.45
+  blockedResponseOpacity: 0.15
   bubblePosition: {x: 0, y: 0, z: 0}
   currentConversation: 0
   isInConversation: 0

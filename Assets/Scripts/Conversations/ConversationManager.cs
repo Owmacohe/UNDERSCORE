@@ -10,7 +10,8 @@ public class ConversationManager : MonoBehaviour
     [SerializeField] Color[] colourOrder;
     [SerializeField] string nextScene;
     [SerializeField] Color awakenedResponseColour;
-    [SerializeField] float responseOpacity = 0.4f;
+    [SerializeField] float responseOpacity = 0.45f;
+    [SerializeField] float blockedResponseOpacity = 0.15f;
 
     GameObject bubbles;
     [HideInInspector] public Vector3 bubblePosition;
@@ -28,6 +29,7 @@ public class ConversationManager : MonoBehaviour
         public string statement;
         public List<string> responses;
         public List<float> awarenessChange;
+        public List<float> awarenessRequirements;
 
         public Node(string n, string s)
         {
@@ -35,6 +37,7 @@ public class ConversationManager : MonoBehaviour
             statement = s;
             responses = new List<string>();
             awarenessChange = new List<float>();
+            awarenessRequirements = new List<float>();
         }
     }
 
@@ -44,7 +47,7 @@ public class ConversationManager : MonoBehaviour
         public string current;
         public List<Node> nodes;
 
-        public Conversation(TextAsset txt, Color col, float awarenessAtCreation)
+        public Conversation(TextAsset txt, Color col)
         {
             colour = col;
             current = "START";
@@ -91,15 +94,15 @@ public class ConversationManager : MonoBehaviour
                                     Debug.Log("No node with name: \"" + name + "\" found!");
                                 else
                                 {
-                                    if ((namesAwarenessRestriction.Length == 3 &&
-                                         awarenessAtCreation >= float.Parse(namesAwarenessRestriction[2])) ||
-                                        namesAwarenessRestriction.Length < 3)
-                                    {
-                                        tempNode.responses.Add(temp);
+                                    tempNode.responses.Add(temp);
                                     
-                                        tempNode.awarenessChange.Add(
-                                            namesAwarenessRestriction.Length >= 2 ? float.Parse(namesAwarenessRestriction[1]) : 0);   
-                                    }
+                                    tempNode.awarenessChange.Add(namesAwarenessRestriction.Length >= 2
+                                        ? float.Parse(namesAwarenessRestriction[1])
+                                        : 0);
+                                    
+                                    tempNode.awarenessRequirements.Add(namesAwarenessRestriction.Length == 3
+                                        ? float.Parse(namesAwarenessRestriction[2])
+                                        : 0);
                                 }
                             }
                         }
@@ -135,8 +138,7 @@ public class ConversationManager : MonoBehaviour
                 controller.info = new NPCController.NPCInformation(
                     new Conversation(
                         conversationOrder[currentConversation],
-                        colourOrder[currentConversation],
-                        manager.awareness),
+                        colourOrder[currentConversation]),
                     false,
                     currentConversation == conversationOrder.Length - 1,
                     nextScene
@@ -149,8 +151,17 @@ public class ConversationManager : MonoBehaviour
 
             for (int i = 0; i < responseColours.Length; i++)
                 responseColours[i] = info.conversation.nodes[0].awarenessChange[i] > 0
-                    ? new Color(awakenedResponseColour.r, awakenedResponseColour.g, awakenedResponseColour.b, responseOpacity)
-                    : new Color(1, 1, 1, responseOpacity);
+                    ? new Color(
+                        awakenedResponseColour.r,
+                        awakenedResponseColour.g,
+                        awakenedResponseColour.b,
+                        manager.awareness >= info.conversation.nodes[0].awarenessRequirements[i]
+                            ? responseOpacity
+                            : blockedResponseOpacity)
+                    : new Color(1, 1, 1, 
+                        manager.awareness >= info.conversation.nodes[0].awarenessRequirements[i]
+                            ? responseOpacity
+                            : blockedResponseOpacity);
 
             bubbles = Instantiate(speechBubble, transform);
             bubbles.GetComponent<SpeechBubblesManager>().Generate(
@@ -158,7 +169,8 @@ public class ConversationManager : MonoBehaviour
                 info.conversation.nodes[0].responses.ToArray(),
                 bubblePosition,
                 info.conversation.colour,
-                responseColours);
+                responseColours,
+                info.conversation.nodes[0].awarenessRequirements.ToArray());
             
             isInConversation = true;
             player.pauseMovement = true;
@@ -171,39 +183,54 @@ public class ConversationManager : MonoBehaviour
 
     public void MakeChoice(int choice)
     {
-        if (!info.completed)
-            manager.UpdateAwareness(info.conversation.FindNode(info.conversation.current).awarenessChange[choice]);
-
-        if (info.conversation.current.Equals("START")) info.conversation.current = "";
+        Node current = info.conversation.FindNode(info.conversation.current);
         
-        Destroy(bubbles);
-
-        Node temp = info.conversation.FindNode(info.conversation.current + choice);
-        
-        Color[] responseColours = new Color[temp.responses.Count];
-
-        for (int i = 0; i < responseColours.Length; i++)
-            responseColours[i] = temp.awarenessChange[i] > 0
-                ? new Color(awakenedResponseColour.r, awakenedResponseColour.g, awakenedResponseColour.b, responseOpacity)
-                : new Color(1, 1, 1, responseOpacity);
-
-        if (temp != null)
+        if (manager.awareness >= current.awarenessRequirements[choice])
         {
-            bubbles = Instantiate(speechBubble, transform);
-            bubbles.GetComponent<SpeechBubblesManager>().Generate(
-                temp.statement,
-                temp.responses.ToArray(),
-                bubblePosition,
-                info.conversation.colour,
-                responseColours);
+            if (!info.completed && current.awarenessChange[choice] != 0)
+                manager.UpdateAwareness(current.awarenessChange[choice]);
 
-            info.conversation.current += choice;
+            if (info.conversation.current.Equals("START")) info.conversation.current = "";
+        
+            Destroy(bubbles);
+        
+            Node temp = info.conversation.FindNode(info.conversation.current + choice);
+
+            Color[] responseColours = new Color[temp.responses.Count];
+
+            for (int i = 0; i < responseColours.Length; i++)
+                responseColours[i] = temp.awarenessChange[i] > 0
+                    ? new Color(
+                        awakenedResponseColour.r,
+                        awakenedResponseColour.g,
+                        awakenedResponseColour.b,
+                        manager.awareness >= temp.awarenessRequirements[i]
+                            ? responseOpacity
+                            : blockedResponseOpacity)
+                    : new Color(1, 1, 1, 
+                        manager.awareness >= temp.awarenessRequirements[i]
+                            ? responseOpacity
+                            : blockedResponseOpacity);
+
+            if (temp != null)
+            {
+                bubbles = Instantiate(speechBubble, transform);
+                bubbles.GetComponent<SpeechBubblesManager>().Generate(
+                    temp.statement,
+                    temp.responses.ToArray(),
+                    bubblePosition,
+                    info.conversation.colour,
+                    responseColours,
+                    temp.awarenessRequirements.ToArray());
+
+                info.conversation.current += choice;
             
-             WaitEndConversation(temp);
-        }
-        else
-        {
-            EndConversation();
+                WaitEndConversation(temp);
+            }
+            else
+            {
+                EndConversation();
+            }   
         }
     }
 
