@@ -14,7 +14,7 @@ public class TerrainManager : MonoBehaviour
     [Header("Points Of Interest")]
     [SerializeField] GameObject pointOfInterest;
     [SerializeField] Vector2 pointOfInterestRange = new Vector2(60, 60);
-    [SerializeField] bool generatePointsOfInterest;
+    [SerializeField] bool generatePointsOfInterest, generateNPCs;
     [SerializeField] float bufferDistanceFromCentre;
     [SerializeField] float bufferDistance = 3;
     [SerializeField] PathChecker checker;
@@ -57,7 +57,7 @@ public class TerrainManager : MonoBehaviour
 
     void Update()
     {
-        if (generatePointsOfInterest && lastSpawnedTerrain != null)
+        if (generatePointsOfInterest && lastSpawnedTerrain != null && lastSpawnedTerrain.spawnedNPC != null)
         {
             checker.CheckAndDelete(
                 player.transform.position,
@@ -87,6 +87,7 @@ public class TerrainManager : MonoBehaviour
 
             temp.Generate(
                 generatePointsOfInterest,
+                generateNPCs,
                 bufferDistanceFromCentre,
                 pointOfInterest,
                 pointOfInterestRange,

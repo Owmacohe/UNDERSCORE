@@ -1,0 +1,87 @@
+[START]
+I've been waiting so long for you.
+I truly never thought we'd meet face to face.
+
+[0]
+You'll forgive me for being human. My worries tend to get the best of me.
+
+[1]
+I can't remember exactly. Sometime during adolescence.
+<br>
+I created you to prop up loneliness.
+
+[2]
+I'd always hoped you'd have as much agency as I do. I wanted a friend, so I made one.
+
+[00]
+Are you mad at me for doubting your existence?
+
+[01]
+I know. I do. I'm sorry.
+<br>
+But... part of you knows that deep down, you and I, we're the same.
+
+[10,20]
+It's complicated. I should go.
+
+[11,21]
+You're the one who understood. Who got it. Who suffered with me.
+<br>
+That idealized you who loved me.
+
+[010]
+If you don't understand, I can't explain it to you. Keep moving.
+
+[011]
+We all matter differently to different people.
+
+[000,110,210]
+It is! This all is.
+But as part of that, it needs to be for me too. That's how being human works.
+
+[100,200,101,201,102,202]
+Maybe it's okay to believe that we needed each other.
+
+###
+
+[START]
+You didn't have faith that your actions actually had meaning?
+
+[START]
+When did you start waiting?
+
+[START:0:0.2]
+I felt the same way.
+
+[0]
+I understand.
+
+[0]
+I can't. You were always there for me.
+
+[1,2:-0.5]
+No, that's not right. I created you.
+
+[1,2:0.5:1]
+Who am I?
+
+[00]
+Just disappointed. Feels weird to think this isn't all for me after all.
+
+[01:-0.5]
+That's Jungian garbage.
+
+[01:0.3:0.5]
+I think I get that.
+
+[10,20]
+Please, don't leave me.
+
+[10,20]
+My head hurts.
+
+[10,20]
+I need to keep moving as well.
+
+[11,21]
+Feels weird to think this isn't all for me after all.

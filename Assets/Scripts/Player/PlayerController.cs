@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [Header("Awakened")]
     [SerializeField] MeshRenderer rightEye;
     [SerializeField] MeshRenderer leftEye;
-    [SerializeField] Material defaultEyesMaterial, awakenedEyesMaterial;
+    [SerializeField] Material defaultEyesMaterial, awakenedEyesMaterial, ascendedMaterial;
     [SerializeField] GameObject rightSpotlight, leftSpotlight;
 
     float fadeSpeed;
@@ -185,6 +186,11 @@ public class PlayerController : MonoBehaviour
 
         rightSpotlight.SetActive(true);
         leftSpotlight.SetActive(true);
+    }
+
+    public void SwitchToAscended()
+    {
+        GetComponentInChildren<SkinnedMeshRenderer>().material = ascendedMaterial;
     }
 
     public void UpdateAfterSceneSwitch()

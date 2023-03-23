@@ -17,6 +17,7 @@ public class TerrainController : MonoBehaviour
 
     public void Generate(
         bool generatePointsOfInterest,
+        bool generateNPCs,
         float bufferFromCentre,
         GameObject POI,
         Vector2 POIRange,
@@ -32,17 +33,20 @@ public class TerrainController : MonoBehaviour
 
         if (generatePointsOfInterest)
         {
-            Vector3 NPCpos = new Vector3(
-                transform.position.x + Random.Range(-half, half),
-                0,
-                transform.position.z + Random.Range(-half, half));
-
-            if (Vector3.Distance(NPCpos, Vector3.zero) > bufferFromCentre)
+            if (generateNPCs)
             {
-                spawnedNPC = Instantiate(NPC, NPCpos, Quaternion.Euler(0, 180, 0), transform);
-                spawnedNPC.GetComponent<NPCController>().followPlayer = NPCFollow;
+                Vector3 NPCpos = new Vector3(
+                    transform.position.x + Random.Range(-half, half),
+                    0,
+                    transform.position.z + Random.Range(-half, half));
+
+                if (Vector3.Distance(NPCpos, Vector3.zero) > bufferFromCentre)
+                {
+                    spawnedNPC = Instantiate(NPC, NPCpos, Quaternion.Euler(0, 180, 0), transform);
+                    spawnedNPC.GetComponent<NPCController>().followPlayer = NPCFollow;
                 
-                pointsOfInterest.Add(spawnedNPC);
+                    pointsOfInterest.Add(spawnedNPC);
+                }   
             }
 
             for (int i = 0; i < Random.Range(POIRange.x, POIRange.y); i++)

@@ -263,6 +263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TitleSmashCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 49870965524103972, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 49870967412993532, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
       propertyPath: text
       value: in the bleak midwinter
@@ -338,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: colourOrder.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: colourOrder.Array.data[0].a
@@ -361,12 +365,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: colourOrder.Array.data[1].b
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: colourOrder.Array.data[1].g
-      value: 0.7666667
+      value: 0.5522876
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: colourOrder.Array.data[1].r
-      value: 1
+      value: 0.7647059
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: colourOrder.Array.data[2].a
@@ -374,19 +382,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: colourOrder.Array.data[2].b
-      value: 0.64413023
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: colourOrder.Array.data[2].g
-      value: 0.7647059
+      value: 0.7666667
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: colourOrder.Array.data[2].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: colourOrder.Array.data[3].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: colourOrder.Array.data[3].b
+      value: 0.64413023
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: colourOrder.Array.data[3].g
+      value: 0.7647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: colourOrder.Array.data[3].r
       value: 0.50980395
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: conversationOrder.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: conversationOrder.Array.data[0]
@@ -395,9 +419,13 @@ PrefabInstance:
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: conversationOrder.Array.data[1]
       value: 
-      objectReference: {fileID: 4900000, guid: 4e7d695b316fe1d44a84f12b5a4e7d3e, type: 3}
+      objectReference: {fileID: 4900000, guid: cc61810795c7af8449c4b07bd51ebb5b, type: 3}
     - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: conversationOrder.Array.data[2]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4e7d695b316fe1d44a84f12b5a4e7d3e, type: 3}
+    - target: {fileID: 706531452634919351, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: conversationOrder.Array.data[3]
       value: 
       objectReference: {fileID: 4900000, guid: 4c78b16000799c446a967e9ab79c9c3c, type: 3}
     - target: {fileID: 4067558126636063852, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
@@ -418,6 +446,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8a5e905f1b03085468ff81f1a04a7153, type: 2}
     - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: NPCFollow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: generateNPCs
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}

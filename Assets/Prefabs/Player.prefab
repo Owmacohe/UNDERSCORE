@@ -228,7 +228,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3299808341043998274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -30, z: 0}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -855,7 +855,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8685346477207307666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -30, z: 0}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1073,6 +1073,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: -6511409914007508194, guid: 554fd12db0c69f8429da931ba878ec46, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 554fd12db0c69f8429da931ba878ec46, type: 3}
       propertyPath: m_Name
       value: Model
@@ -1197,6 +1201,7 @@ MonoBehaviour:
   leftEye: {fileID: 6676195417234645841}
   defaultEyesMaterial: {fileID: 2100000, guid: f6ab429a6ef7f43a086282ffa3ee8a8f, type: 2}
   awakenedEyesMaterial: {fileID: 2100000, guid: 0d3f279c776759d4f8967033e1878d03, type: 2}
+  ascendedMaterial: {fileID: 2100000, guid: b94d59eb4b9a1a6428b67a01b338222d, type: 2}
   rightSpotlight: {fileID: 8685346477207307666}
   leftSpotlight: {fileID: 3299808341043998274}
   isFading: 0
@@ -1218,3 +1223,25 @@ MonoBehaviour:
   playerLight: {fileID: 4849787754823012326}
   playerCamera: {fileID: 4741910205835402085}
   awareness: 0
+--- !u!1 &7236287462423476700 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6511409914007508194, guid: 554fd12db0c69f8429da931ba878ec46, type: 3}
+  m_PrefabInstance: {fileID: 4741910204952416962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7093891828382182666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7236287462423476700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: d321da87c1c894c4bafc9b86a566ab7c, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0

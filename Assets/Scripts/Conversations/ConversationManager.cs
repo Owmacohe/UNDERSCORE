@@ -238,7 +238,7 @@ public class ConversationManager : MonoBehaviour
     {
         if (check.responses == null || check.responses.Count == 0)
         {
-            Invoke(nameof(EndConversation), check.statement.Length * 0.08f);
+            Invoke(nameof(EndConversation), check.statement.Length * 0.08f + 3);
             
             player.pauseMovement = false;
             

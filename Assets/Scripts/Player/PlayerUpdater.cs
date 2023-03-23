@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerUpdater : MonoBehaviour
 {
-    [SerializeField] bool awakenOnStart;
+    [SerializeField] bool awakenOnStart, ascendOnStart;
     
     void Start()
     {
@@ -11,9 +11,7 @@ public class PlayerUpdater : MonoBehaviour
         
         temp.UpdateAfterSceneSwitch();
 
-        if (awakenOnStart)
-        {
-            temp.SwitchToAwakened();
-        }
+        if (awakenOnStart) temp.SwitchToAwakened();
+        else if (ascendOnStart) temp.SwitchToAscended();
     }
 }
