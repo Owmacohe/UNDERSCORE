@@ -256,6 +256,11 @@ public class ConversationManager : MonoBehaviour
         
         if (!info.ignoreOrder) currentConversation++;
 
-        if (info.switchSceneOnEnd) SceneManager.LoadScene(info.targetScene);
+        if (info.switchSceneOnEnd)
+        {
+            if (info.targetScene.Equals("End")) Destroy(GameObject.FindWithTag("Player").transform.parent.gameObject);
+            
+            SceneManager.LoadScene(info.targetScene);
+        }
     }
 }

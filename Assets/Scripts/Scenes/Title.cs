@@ -21,11 +21,18 @@ public class Title : MonoBehaviour
     void Show()
     {
         player.ShowText("<shake a=0.05>" + text + "</shake>");
-        button.SetActive(true);
+        if (button != null) button.SetActive(true);
     }
 
     public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        if (sceneName.Equals("Quit"))
+        {
+            Application.Quit(0);
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneName);   
+        }
     }
 }

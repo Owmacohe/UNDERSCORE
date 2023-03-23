@@ -1,0 +1,146 @@
+[START]
+Do you understand yet?
+
+[0]
+I need to know if you're ready to move on.
+
+[2]
+Please, illuminate me.
+While subjective, there are correct answers.
+
+[00]
+But... but how can I know you are?
+
+[01,1]
+Perhaps that's the cosmic irony of it all. Though the austerity of this place rings true, it's fundamentally no different from our waking world.
+
+[20,23]
+I refuse to believe it. This place is seamless. Perfect. Utterly distinct from waking life. There are correct choices.
+
+[21]
+That's... true. To some extent. That's what you're here for, but that's not what you're supposed to understand.
+
+[22]
+Yes, very good. You are not special. But it's because of this fact that I love you so much. You remind me of me.
+
+[000,001]
+That's not how it works! I'm the final test! The bulwark before release! I...
+I...
+<br>
+Okay.
+
+[010,10,200,230]
+I don't know what to say. You're correct, but I have no test for this. No measure for understanding.
+
+[221]
+I understand. It's okay. It's a difficult thing to come to terms with.
+
+[0000,0010,0100,100,2000,2300]
+I've been going for so long. Funneling you again and again through the cycle. Maybe you're right. Maybe it's time this all stops.
+
+[0101,101,2001,2301,201,231,210]
+You were truly and utterly so close.
+
+[220,2210]
+Now you get to breathe. No more lessons, so more love, no more understanding.
+<br>
+Just go.
+
+[00000,00100,01000,1000,20000,23000]
+I'm releasing you. You're free. But... I'm also releasing myself. No more comforting the dead. We all deserve nothingness.
+
+[01010,1010,20010,23010,2010,2310,2100]
+Now you restart. You are reborn.
+You keep moving.
+<br>
+Until you finally understand.
+
+[2200,22100]
+You're free.
+
+[000000,001000,010000,10000,200000,230000,000001,001001,010001,10001,200001,230001,000002,001002,010002,10002,200002,230002]
+I love you too.
+
+[010100,10100,200100,230100,20100,23100,21000]
+Most undoubtedly.
+And remember, keep moving.
+
+###
+
+[START:0]
+Why do you keep coming back?
+
+[START:-0.4]
+No, I never really did.
+
+[START:0.4:0.5]
+I actually do.
+
+[0:0:1]
+I really, truly am.
+
+[0]
+I just... don't get it.
+
+[2:0.4:1]
+No there aren't.
+
+[2:0.1]
+I understand that I'm supposed just accept the comfort of here.
+
+[2:0.2:0.75]
+I understand that fundamentally, we're no different.
+
+[2:0.4:1]
+I understand that this place is truly no different from life.
+
+[00:1]
+What's that you keep saying? Everyone here is the same. If I'm not ready, neither are you.
+
+[00:0.6]
+You can't. You'll just have to trust me.
+
+[01,1,20,23]
+I still feel the same.
+
+[20,23,21]
+Oh. Okay. I thought I had it.
+
+[22]
+So... what now?
+
+[22]
+I thought there'd be more than this.
+
+[000,001]
+Okay?
+
+[010,10,200,230:1:1]
+And that's okay. Sometimes we never know. It's time for you to take a break.
+
+[010,10,200,230:-1]
+It hurts me to see you like this. And I don't want to fight anymore. I give up.
+
+[221]
+So... what now?
+
+[0000,0010,0100,100,2000,2300]
+So... what happens now?
+
+[0101,101,2001,2301,201,231,210]
+What now?
+
+[220,2210]
+I'm free?
+
+[00000,00100,01000,1000,20000,23000:3]
+I love you.
+
+[00000,00100,01000,1000,20000,23000:3]
+I love you.
+
+[00000,00100,01000,1000,20000,23000:3]
+I love you.
+
+[01010,1010,20010,23010,2010,2310,2100]
+Will I see you again?

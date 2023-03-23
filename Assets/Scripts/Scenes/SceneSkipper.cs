@@ -13,6 +13,8 @@ public class SceneSkipper : MonoBehaviour
 
     void Skip()
     {
+        if (next.Equals("End")) Destroy(GameObject.FindWithTag("Player").transform.parent.gameObject);
+        
         SceneManager.LoadScene(next);
     }
 }

@@ -147,7 +147,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 284844422}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 128cb15367004f22b2723fd9dda46c55, type: 3}
   m_Name: 
@@ -262,10 +262,6 @@ PrefabInstance:
     - target: {fileID: 49870965524103972, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
       propertyPath: m_Name
       value: TitleSmashCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 49870965524103972, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 49870967412993532, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
       propertyPath: text

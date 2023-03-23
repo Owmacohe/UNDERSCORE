@@ -123,6 +123,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1195210671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1195210673}
+  - component: {fileID: 1195210672}
+  - component: {fileID: 1195210674}
+  m_Layer: 0
+  m_Name: Moon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1195210672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195210671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c25eec0a914b359c0abdfe22b56adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrains: {fileID: 158111106593252888}
+  colour: {r: 1, g: 0.7666667, b: 0, a: 1}
+  conversation: {fileID: 4900000, guid: 824f697561a7d004ca2d928f56f74cca, type: 3}
+--- !u!4 &1195210673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195210671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1195210674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195210671}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128cb15367004f22b2723fd9dda46c55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  next: End
 --- !u!1001 &1532607766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,10 +279,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TitleSmashCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 49870965524103972, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 49870967412993532, guid: c89f978a40dc9c24890cae781c3083a7, type: 3}
       propertyPath: text
       value: everyone here is you
@@ -316,11 +373,26 @@ PrefabInstance:
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+      propertyPath: bufferDistanceFromCentre
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
       propertyPath: generatePointsOfInterest
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+--- !u!114 &158111106593252888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8406903939160997514, guid: 5666cd3870b744a308ba18450865a0c8, type: 3}
+  m_PrefabInstance: {fileID: 158111106593252887}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c7b84e3d3741ae84b1f454e9587dec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3399137257932589937
 PrefabInstance:
   m_ObjectHideFlags: 0
