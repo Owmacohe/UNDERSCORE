@@ -28,6 +28,7 @@ public class TerrainController : MonoBehaviour
     {
         terrainTransform = transform.GetChild(0).transform;
         float half = (terrainTransform.localScale.x / 2) * 10;
+        print(half);
 
         Vector3 playerPos = GameObject.FindWithTag("Player").transform.position;
 

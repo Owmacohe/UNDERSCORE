@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float clickRadius = 2;
     [SerializeField] Image fade;
 
+    [SerializeField] GameObject quitCanvas;
+
     [Header("Awakened")]
     [SerializeField] MeshRenderer rightEye;
     [SerializeField] MeshRenderer leftEye;
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool isFading, fadeIn;
     [HideInInspector] public bool pauseMovement;
+    [HideInInspector] public float scope;
 
     void Start()
     {
@@ -46,6 +49,8 @@ public class PlayerController : MonoBehaviour
         ResetMovement(false);
 
         allNPCs = GameObject.FindGameObjectsWithTag("NPC");
+        
+        scope = Single.PositiveInfinity;
     }
 
     void Update()
@@ -61,9 +66,9 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out var hit))
             {
-                if ((hit.transform.parent != null &&
+                if (((hit.transform.parent != null &&
                      (hit.transform.parent.gameObject.CompareTag("Terrain") || hit.transform.parent.gameObject.CompareTag("NPC"))) ||
-                    hit.transform.gameObject.CompareTag("Player"))
+                    hit.transform.gameObject.CompareTag("Player")) && Vector3.Distance(Vector3.zero, hit.point) < scope)
                 {
                     if (Vector3.Distance(transform.position, hit.point) > clickRadius &&
                         !hit.transform.gameObject.Equals(gameObject))
@@ -115,10 +120,15 @@ public class PlayerController : MonoBehaviour
                         ResetMovement(false);
 
                         anim.SetTrigger("wiggle");
-                    }   
+                    }
                 }
             }
         }
+    }
+
+    void OnToggleExit()
+    {
+        quitCanvas.SetActive(!quitCanvas.activeSelf);
     }
 
     void FixedUpdate()

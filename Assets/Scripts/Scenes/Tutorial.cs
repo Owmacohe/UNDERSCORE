@@ -44,7 +44,7 @@ public class Tutorial : MonoBehaviour
         
         if (tutorialProgress == 1 && terrains.lastExtraNpcTransform != null)
         {
-            tips.ShowTip("<b>[CLICK]</b> here!", terrains.lastExtraNpcTransform.position, 5, 0, false);
+            tips.ShowTip("<b>[CLICK]</b> here to talk!", terrains.lastExtraNpcTransform.position, 5, 0, false);
 
             tutorialProgress++;
         }

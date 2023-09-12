@@ -26,13 +26,6 @@ public class Title : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        if (sceneName.Equals("Quit"))
-        {
-            Application.Quit(0);
-        }
-        else
-        {
-            SceneManager.LoadScene(sceneName);   
-        }
+        SceneChanger.Change(sceneName);
     }
 }

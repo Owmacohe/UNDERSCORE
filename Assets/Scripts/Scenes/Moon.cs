@@ -7,6 +7,8 @@ public class Moon : MonoBehaviour
     [SerializeField] Color colour;
     [SerializeField] TextAsset conversation;
 
+    PlayerController player;
+
     void Start()
     {
         terrains.generateExtraNPC = true;
@@ -16,5 +18,13 @@ public class Moon : MonoBehaviour
             true,
             "End"
         );
+        
+        player = FindObjectOfType<PlayerController>();
+        Invoke(nameof(SetScope), 0.1f);
+    }
+
+    void SetScope()
+    {
+        player.scope = 35;
     }
 }
