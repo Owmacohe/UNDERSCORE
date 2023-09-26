@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -60,75 +60,51 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
+        GamepadStatus.UsingGamepad = false;
+        
         if (!pauseMovement && !pointerOverUI)
         {
             Ray ray = main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out var hit))
-            {
-                if (((hit.transform.parent != null &&
-                     (hit.transform.parent.gameObject.CompareTag("Terrain") || hit.transform.parent.gameObject.CompareTag("NPC"))) ||
-                    hit.transform.gameObject.CompareTag("Player")) && Vector3.Distance(Vector3.zero, hit.point) < scope)
-                {
-                    if (Vector3.Distance(transform.position, hit.point) > clickRadius &&
-                        !hit.transform.gameObject.Equals(gameObject))
-                    {
-                        if (hit.transform.parent != null) clickedNPC = hit.transform.parent.gameObject.CompareTag("NPC");
+                MoveTowards(hit);
+        }
+    }
 
-                        if (clickedNPC) convoManager.bubblePosition = hit.transform.position;
-                        else
-                        {
-                            foreach (GameObject i in allNPCs)
-                            {
-                                if (Vector3.Distance(i.transform.position, hit.point) <= clickRadius)
-                                {
-                                    clickedNPC = true;
-                                    convoManager.bubblePosition = i.transform.position;
-                                    break;
-                                }
-                            }
-                        }
-                        
-                        if (clickedNPC)
-                        {
-                            targetController = hit.transform.parent.GetComponent<NPCController>();
-                            
-                            if (Vector3.Distance(transform.position, hit.transform.position) <= clickRadius)
-                            {
-                                ResetMovement(true, targetController);
-                                return;   
-                            }
-                        }
+    void OnWalk(InputValue value)
+    {
+        GamepadStatus.UsingGamepad = true;
 
-                        target = clickedNPC ? hit.transform.position : hit.point;
-                        direction = target - transform.position;
+        Vector2 dir = value.Get<Vector2>();
 
-                        moving = true;
-                        anim.SetBool("isWalking", true);
-                        if (direction.magnitude >= 15)
-                        {
-                            anim.SetBool("isJogging", true);
-                            speedBoost = 1.5f;
-                        }
-
-                        direction = direction.normalized;
-
-                        if (clickedNPC) target -= direction * clickRadius * 3;
-                    }
-                    else
-                    {
-                        ResetMovement(false);
-
-                        anim.SetTrigger("wiggle");
-                    }
-                }
-            }
+        if (!convoManager.isInConversation)
+        {
+            Ray ray = main.ScreenPointToRay(main.WorldToScreenPoint(transform.position + new Vector3(dir.x, 0, dir.y) * 10));
+        
+            if (Physics.Raycast(ray, out var hit))
+                MoveTowards(hit);   
+        }
+        else
+        {
+            bool right = dir.x > 0;
+            bool left = dir.x < 0;
+            
+            if (right) convoManager.currentManager.HighlightNext(true);
+            if (left) convoManager.currentManager.HighlightNext(false);
         }
     }
 
     void OnToggleExit()
     {
         quitCanvas.SetActive(!quitCanvas.activeSelf);
+    }
+
+    void OnSelect()
+    {
+        GamepadStatus.UsingGamepad = true;
+
+        if (convoManager.isInConversation)
+            convoManager.MakeChoice(convoManager.currentManager.lastHighlighted);
     }
 
     void FixedUpdate()
@@ -169,6 +145,66 @@ public class PlayerController : MonoBehaviour
             fade.color = new Color(0, 0, 0, fade.color.a + (fadeIn ? -0.01f : 0.0001f * fadeSpeed)); // TODO: better fade speed
 
             if ((fadeIn && fade.color.a <= 0.01) || (!fadeIn && fade.color.a >= 0.99)) isFading = false;
+        }
+    }
+
+    void MoveTowards(RaycastHit hit)
+    {
+        if (((hit.transform.parent != null &&
+              (hit.transform.parent.gameObject.CompareTag("Terrain") || hit.transform.parent.gameObject.CompareTag("NPC"))) ||
+             hit.transform.gameObject.CompareTag("Player")) && Vector3.Distance(Vector3.zero, hit.point) < scope)
+        {
+            if (Vector3.Distance(transform.position, hit.point) > clickRadius &&
+                !hit.transform.gameObject.Equals(gameObject))
+            {
+                if (hit.transform.parent != null) clickedNPC = hit.transform.parent.gameObject.CompareTag("NPC");
+
+                if (clickedNPC) convoManager.bubblePosition = hit.transform.position;
+                else
+                {
+                    foreach (GameObject i in allNPCs)
+                    {
+                        if (Vector3.Distance(i.transform.position, hit.point) <= clickRadius)
+                        {
+                            clickedNPC = true;
+                            convoManager.bubblePosition = i.transform.position;
+                            break;
+                        }
+                    }
+                }
+            
+                if (clickedNPC)
+                {
+                    targetController = hit.transform.parent.GetComponent<NPCController>();
+                
+                    if (Vector3.Distance(transform.position, hit.transform.position) <= clickRadius)
+                    {
+                        ResetMovement(true, targetController);
+                        return;   
+                    }
+                }
+
+                target = clickedNPC ? hit.transform.position : hit.point;
+                direction = target - transform.position;
+
+                moving = true;
+                anim.SetBool("isWalking", true);
+                if (direction.magnitude >= 15)
+                {
+                    anim.SetBool("isJogging", true);
+                    speedBoost = 1.5f;
+                }
+
+                direction = direction.normalized;
+
+                if (clickedNPC) target -= direction * clickRadius * 3;
+            }
+            else
+            {
+                ResetMovement(false);
+
+                anim.SetTrigger("wiggle");
+            }   
         }
     }
 

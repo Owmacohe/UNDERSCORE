@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpeechBubblesManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class SpeechBubblesManager : MonoBehaviour
     string[] responseTexts;
     Color[] responseColours;
     float[] awarenessRequirements;
+
+    [HideInInspector] public int lastHighlighted;
+    float lastHighlightedTime;
 
     void Start()
     {
@@ -85,6 +89,38 @@ public class SpeechBubblesManager : MonoBehaviour
                 i,
                 interval * (i + 1),
                 170);
+        }
+
+        if (GamepadStatus.UsingGamepad)
+            SetHighlight(0, true);
+    }
+
+    public void SetHighlight(int index, bool active)
+    {
+        lastHighlighted = index;
+        lastHighlightedTime = Time.time;
+        
+        foreach (var i in bubbles[index + 1].GetComponentsInChildren<Outline>())
+            i.enabled = active;
+    }
+
+    public void HighlightNext(bool right)
+    {
+        if (bubbles.Count > 1 && Time.time - lastHighlightedTime >= 0.3f)
+        {
+            if (right && lastHighlighted < bubbles.Count - 2)
+            {
+                SetHighlight(lastHighlighted, false);
+                SetHighlight(lastHighlighted + 1, true);
+                return;
+            }
+
+            if (!right && lastHighlighted > 0)
+            {
+                SetHighlight(lastHighlighted, false);
+                SetHighlight(lastHighlighted - 1, true);
+                return;
+            }
         }
     }
 }

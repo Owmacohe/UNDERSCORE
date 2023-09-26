@@ -40,6 +40,9 @@ public class TitleSmash : MonoBehaviour
         txt.fontSize = 1200f / text.Length + 55;
         waitTime = 20f / text.Length;
 
+        float scaleOffset = -0.346f * Camera.main.aspect + 1.588f;
+        transform.localScale = Vector3.one * scaleOffset;
+
         amount = 3f / text.Length;
         float max = 0.1f;
         float min = 0.04f;

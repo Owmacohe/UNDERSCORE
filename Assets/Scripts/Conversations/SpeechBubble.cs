@@ -138,6 +138,11 @@ public class SpeechBubble : MonoBehaviour
         Image img = temp.AddComponent<Image>();
         img.color = bubbleColour;
         img.sprite = spr;
+
+        Outline outline = temp.AddComponent<Outline>();
+        outline.effectColor = new Color(bubbleColour.r, bubbleColour.g, bubbleColour.b, 0.2f);
+        outline.effectDistance = Vector2.one * 3;
+        outline.enabled = false;
         
         temp.GetComponent<RectTransform>().localScale = Vector3.one;
 

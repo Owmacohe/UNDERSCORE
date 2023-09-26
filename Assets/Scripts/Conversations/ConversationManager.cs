@@ -19,6 +19,7 @@ public class ConversationManager : MonoBehaviour
     [HideInInspector] public int currentConversation;
     [HideInInspector] public bool isInConversation;
     NPCController.NPCInformation info;
+    [HideInInspector] public SpeechBubblesManager currentManager;
 
     PlayerController player;
     AwarenessManager manager;
@@ -164,10 +165,12 @@ public class ConversationManager : MonoBehaviour
                             : blockedResponseOpacity);
 
             bubbles = Instantiate(speechBubble, transform);
-            bubbles.GetComponent<SpeechBubblesManager>().Generate(
+            currentManager = bubbles.GetComponent<SpeechBubblesManager>();
+            
+            currentManager.Generate(
                 info.conversation.nodes[0].statement,
                 info.conversation.nodes[0].responses.ToArray(),
-                bubblePosition,
+                bubblePosition + player.transform.parent.forward,
                 info.conversation.colour,
                 responseColours,
                 info.conversation.nodes[0].awarenessRequirements.ToArray());
@@ -215,10 +218,11 @@ public class ConversationManager : MonoBehaviour
             if (temp != null)
             {
                 bubbles = Instantiate(speechBubble, transform);
-                bubbles.GetComponent<SpeechBubblesManager>().Generate(
+                currentManager = bubbles.GetComponent<SpeechBubblesManager>();
+                currentManager.Generate(
                     temp.statement,
                     temp.responses.ToArray(),
-                    bubblePosition,
+                    bubblePosition + player.transform.parent.forward,
                     info.conversation.colour,
                     responseColours,
                     temp.awarenessRequirements.ToArray());
